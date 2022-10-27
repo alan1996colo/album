@@ -1,0 +1,12 @@
+Tp notasCambios profe:
+
+1)Album del mundial debe guardar todos los participantes y a cada uno con su album.
+--cita textual "Es quién debería guardar todos los participantes y a cada uno con su álbum."
+Entendemos que quiso decir que en hagamos TADS de tipo participantes, que contengan Album.
+Reelaboramos el diseño para que el tad principal, en lugar de tener guardado albumes, tenga guardadps participantes que tienen albumes.
+
+
+2)Calcular valor final, debe ser un metodo polimorffico de figurita y no de AlbumdelMundial.
+3)En el TAD Álbum del mundial no se puede construir pasando como parámetro colecciones completas. Este TAD no se pide que almacene el universo de las posibles figuritas que se pueden comprar, por otro lado, no hay límites en la cantidad de participantes. 
+
+4)Pidio poner un limite de participantes, lo vamos a poner en 100000000 de participantes.
