@@ -2,15 +2,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
-    HashTable <String ,Usuario >participantesConAlbumes;
+    HashTable <Integer ,Usuario >participantesConAlbumes;
     Figurita coleccionCompleta[];
     Figurita coleccion20[];
 	Map<String, Boolean> codigoWeb = new HashMap<>();
 		
 
-
-
-
+/**Crea una string al azar del largo n, usa StringBuilder
+ * 
+*/
+private String crearStringRandom(int n){
+	// elige un caracter al azar de la String
+	String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		   + "0123456789"
+		   + "abcdefghijklmnopqrstuvxyz";
+   
+	// crea un StringBuffer con el tamaño n pasado por parametro
+	StringBuilder sb = new StringBuilder(n);
+   
+	for (int i = 0; i < n; i++) {
+   
+	 // crea un numero al azar entre 
+	 // 0 y AlphaNumericString variable length
+	 int index
+	  = (int)(AlphaNumericString.length()
+		* Math.random());
+   
+	 // agrega el caracter uno por uno a la StringBuilder
+	 sb.append(AlphaNumericString
+		.charAt(index));
+	}
+   
+	return sb.toString();
+   }
 /**
 	 * Registra un nuevo participante y devuelve el codigo unico del album
 	 * asociado.
@@ -18,17 +42,28 @@ public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
 	 * Si el participante ya está registrado o el tipo de album es invalido, 
 	 * se debe lanzar una excepcion.
 	 */
-	int registrarParticipante(int dni, String nombre, String tipoAlbum){
+public int registrarParticipante(int dni, String nombre, String tipoAlbum){
+	
 		Usuario nuevo= new Usuario(dni, nombre);
-		int var= nombre.hashCode()+dni;
-
+		int codigoUnico= nuevo.toString().hashCode();
+		if(participantesConAlbumes.containsKey(codigoUnico)){//reviso el maps, si el hashcode ya esta en uso, el participante ya esta registrado.
+			throw Exception("El participante, ya se encuentra registrado");
+		}
 		//Primero elegimos el tipo de album:
-		if(tipoAlbum=="Tradicional"){AlbumTradicional nuevoAl= new AlbumTradicional(var, nombre, dni);}
-		else if(tipoAlbum=="Web"){AlbumWeb nuevoAl= new AlbumWeb(tipoAlbum, dni, nombre, dni)}
+		if(tipoAlbum=="Tradicional"){AlbumTradicional nuevoAl= new AlbumTradicional(codigoUnico, nombre, dni);}
+		else if(tipoAlbum=="Web"){
+			//creamos el codigo web en el momento.
+			String codigoPromocional=crearStringRandom(6);
+			if(codigoWeb.containsKey(codigoPromocional)){//Si hay una remota posibilidad de que el codigo ya se haya inventado, creamos otro con un caracter mas.
+				codigoPromocional=crearStringRandom(7);
+			}
+			
+			codigoWeb.put(codigoPromocional, false);
+			AlbumWeb nuevoAl= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);}
 			else if(tipoAlbum=="Extendido"){}
 		else {throw new Exception("El tipo de album no es valido");}
 		
-		return var;
+		return codigoUnico;
 		
 
 	}
