@@ -8,5 +8,15 @@ public Usuario(int dni, String nombre){
 }
 boolean solicitarAlbum(String tipoAlbum){return false;}
 void comprarFigus(String tipoDeFigu){}
+void vermicodigoeb(){}
+void comprarfigusconcodigowev(){}
+void solicitarPegarFigus(){}
+boolean completeElAlbum(){}
+void solicitarPremio(){}
+public String toString(){return "";}
+boolean solicitarIntercambio(String nombreFigu){}
+void verMisFigusRepet(){}
+void mostrarSinpegar(){}
+void quienCompletoElPais(String pais){}
 
 }
