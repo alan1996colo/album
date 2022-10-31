@@ -1,7 +1,16 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
     HashTable <String ,Usuario >participantesConAlbumes;
     Figurita coleccionCompleta[];
     Figurita coleccion20[];
+	Map<String, Boolean> codigoWeb = new HashMap<>();
+		
+
+
+
+
 /**
 	 * Registra un nuevo participante y devuelve el codigo unico del album
 	 * asociado.
@@ -9,7 +18,20 @@ public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
 	 * Si el participante ya está registrado o el tipo de album es invalido, 
 	 * se debe lanzar una excepcion.
 	 */
-	int registrarParticipante(int dni, String nombre, String tipoAlbum){}
+	int registrarParticipante(int dni, String nombre, String tipoAlbum){
+		Usuario nuevo= new Usuario(dni, nombre);
+		int var= nombre.hashCode()+dni;
+
+		//Primero elegimos el tipo de album:
+		if(tipoAlbum=="Tradicional"){AlbumTradicional nuevoAl= new AlbumTradicional(var, nombre, dni);}
+		else if(tipoAlbum=="Web"){AlbumWeb nuevoAl= new AlbumWeb(tipoAlbum, dni, nombre, dni)}
+			else if(tipoAlbum=="Extendido"){}
+		else {throw new Exception("El tipo de album no es valido");}
+		
+		return var;
+		
+
+	}
 
 	/**
 	 * Se generan 4 figuritas al azar y 
