@@ -3,6 +3,13 @@ import java.util.Map;
 
 public abstract class Album {
     String tipoAlbum;
+    public String getTipoAlbum() {
+        return tipoAlbum;
+    }
+
+
+
+
     int cantPaises=32;//esto quizas lo saquemos por lo de la fabrica
     String codigoUnico;
     int dniDueño;//esto quizas despues lo saquemos
@@ -19,8 +26,13 @@ public abstract class Album {
     }
     public abstract void premioFinal();
     public String toString(){return "";}
-    public void agregarFigu(){};
-    public void verificarYpegarFigus(){};
+    /**
+     * Agrega una figurita a la lista de figuritas sin pegar
+     * @param figu
+     */
+    public void agregarFigu(Figurita figu){figuritasSinpegar.append(figu);}
+    public List<String>  verificarYpegarFigus(){//Falta implementar xd
+    };
     public void mostrarSinpegar(){};
     public void mostrarRepetidas(){};
 

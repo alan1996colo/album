@@ -1,3 +1,10 @@
+
+
+//Diseño actual
+//AlbumDelMundial<--->Usuario-->Album{Tradicional,Web,Extendido} 
+
+
+
 import java.util.Set;
 
 import javax.swing.table.TableRowSorter;
@@ -6,11 +13,11 @@ public class Usuario{
 int dni;
 String nombre;
 Album albumpropio;
-/*public Album getAlbumpropio() {
+public Album getAlbumpropio() {
     return albumpropio;
 }
-//espero sea inecesario
-*/
+
+
 public void setAlbumpropio(Album albumpropio) {
     this.albumpropio = albumpropio;
 }
@@ -25,7 +32,9 @@ boolean solicitarAlbum(String tipoAlbum){return false;}
 void comprarFigus(String tipoDeFigu){}
 void vermicodigoweb(){}
 void comprarfigusconcodigoweb(){}
-void solicitarPegarFigus(){}
+List<String>  solicitarPegarFigus(){
+    return albumpropio.verificarYpegarFigus();
+}
 /**
  * Le pregunta al album si esta completo, True =Si, False=No.
 */

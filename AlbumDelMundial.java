@@ -83,7 +83,25 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	void comprarFiguritas(int dni){}
+	public void comprarFiguritas(int dni){//falta implementar lo de la excepcion.
+
+		//elige 4 al azar de la coleccion completa, los clona, les cambia el tipo de figurita por el mismo del solicitante y agrega a la
+		//lista de figuritas sin pegar.
+		
+
+
+		for (int i = 0; i < 4; i++) {
+   
+			// crea un numero al azar entre 
+			// 0 y coleccion completa length
+			int index
+			 = (int)(coleccionCompleta.length()
+			   * Math.random());
+			Figurita nueva=(Figurita)coleccionCompleta[index].clone();// Hay que implementar clone en la clase Figurita
+			nueva.setTipo(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum()); //Hay que implementar setTipo en la clase Figurita
+			   participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
+			
+	}}
 	
 	/**
 	 * Se generan 4 figuritas top 10 al azar y 
@@ -92,7 +110,20 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 * Si el participante no tiene album top10, se debe lanzar una excepción.
 	 */
-	void comprarFiguritasTop10(int dni){}
+	public void comprarFiguritasTop10(int dni){//falta implementar lo de la excepcion.
+
+		for (int i = 0; i < 4; i++) {
+   
+			// crea un numero al azar entre 
+			// 0 y coleccion completa length
+			int index
+			 = (int)(coleccion20.length()
+			   * Math.random());
+			Figurita nueva=(Figurita)coleccion20[index].clone();// Hay que implementar clone en la clase Figurita
+			participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
+			
+	}
+	}
 
 	/**
 	 * Compra por única vez un grupo de 4 figuritas con el codigo promocional 
@@ -102,7 +133,30 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * Si el participante no tiene codigo de sorteo o el mismo ya fué usado,
 	 * se debe lanzar una excepcion.
 	 */
-	void comprarFiguritasConCodigoPromocional(int dni){}
+	public void comprarFiguritasConCodigoPromocional(int dni){//falta implementar la excepcion
+		Usuario usr= participantesConAlbumes.get(DniToHash.get(dni));
+		if(codigoWeb.get(usr.getAlbumpropio().getCodigoWeb())){//Si esta disponible lo hago no disponible y entrego las figuritas.
+			codigoWeb.put(usr.getAlbumpropio().getCodigoWeb(), false);
+
+
+			for (int i = 0; i < 4; i++) {
+   
+				// crea un numero al azar entre 
+				// 0 y coleccion completa length
+				int index
+				 = (int)(coleccionCompleta.length()
+				   * Math.random());
+				Figurita nueva=(Figurita)coleccionCompleta[index].clone();// Hay que implementar clone en la clase Figurita
+				nueva.setTipo("Tradicional"); //Hay que implementar setTipo en la clase Figurita
+				   participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
+				
+		}
+
+		}
+		else throw Exception("Lo sentimos, el codigo web ya ha sido utilizado.");
+
+
+	}
 
 	/**
 	 * Busca entre las figuritas del participante cuales aún no están en el 
@@ -112,7 +166,13 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	List<String> pegarFiguritas(int dni){}
+	public List<String> pegarFiguritas(int dni){
+		return participantesConAlbumes.get(DniToHash.get(dni)).solicitarPegarFigus();
+
+
+
+
+	}
 
 	/**
 	 * Verifica si el participante identificado por dni ya completó el album.
