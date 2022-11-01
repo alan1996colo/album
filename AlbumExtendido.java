@@ -1,5 +1,5 @@
 public class AlbumExtendido extends AlbumTradicional{
-    public AlbumExtendido(String codigoUnico, String nombreDueño, int dniDueño) {
+    public AlbumExtendido(int codigoUnico, String nombreDueño, int dniDueño) {
         super(codigoUnico, nombreDueño, dniDueño);
         //TODO Auto-generated constructor stub
     }

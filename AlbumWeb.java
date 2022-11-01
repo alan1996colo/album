@@ -1,8 +1,8 @@
 public class AlbumWeb extends Album{
 String codigoWeb;
-String tipoAlbum="web";
+String tipoAlbum="Web";
 
-public AlbumWeb(String codigoWeb,String codigoUnico,String nombreDueño, int dniDueño){
+public AlbumWeb(String codigoWeb,int codigoUnico,String nombreDueño, int dniDueño){
     this.codigoWeb=codigoWeb;
     this.codigoUnico=codigoUnico;
     this.nombreDueño=nombreDueño;

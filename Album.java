@@ -14,6 +14,9 @@ public abstract class Album {
     String premioFinal;
     boolean AlbumCompleto;
     
+    public boolean isAlbumCompleto() {
+        return AlbumCompleto;
+    }
     public abstract void premioFinal();
     public String toString(){return "";}
     public void agregarFigu(){};

@@ -1,11 +1,14 @@
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
-    HashTable <Integer ,Usuario >participantesConAlbumes;
+    Hashtable<Integer ,Usuario >participantesConAlbumes;
     Figurita coleccionCompleta[];
     Figurita coleccion20[];
 	Map<String, Boolean> codigoWeb = new HashMap<>();
+	Map<Integer,Integer> DniToHash= new HashMap<>();//La idea es hacer un diccionario, con los dnis y hash correspondientes, despues dado un dni consigo el hash y puedo buscar en el otro map.
+
 		
 
 /**Crea una string al azar del largo n, usa StringBuilder
@@ -44,25 +47,31 @@ private String crearStringRandom(int n){
 	 */
 public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	
-		Usuario nuevo= new Usuario(dni, nombre);
-		int codigoUnico= nuevo.toString().hashCode();
+		Usuario nuevoPart= new Usuario(dni, nombre);
+		int codigoUnico= nuevoPart.toString().hashCode();
 		if(participantesConAlbumes.containsKey(codigoUnico)){//reviso el maps, si el hashcode ya esta en uso, el participante ya esta registrado.
 			throw Exception("El participante, ya se encuentra registrado");
 		}
+		else{
 		//Primero elegimos el tipo de album:
-		if(tipoAlbum=="Tradicional"){AlbumTradicional nuevoAl= new AlbumTradicional(codigoUnico, nombre, dni);}
-		else if(tipoAlbum=="Web"){
-			//creamos el codigo web en el momento.
-			String codigoPromocional=crearStringRandom(6);
-			if(codigoWeb.containsKey(codigoPromocional)){//Si hay una remota posibilidad de que el codigo ya se haya inventado, creamos otro con un caracter mas.
-				codigoPromocional=crearStringRandom(7);
-			}
+			if(tipoAlbum=="Tradicional"){AlbumTradicional nuevoAlb= new AlbumTradicional(codigoUnico, nombre, dni);}
+			else if(tipoAlbum=="Web"){
+				//creamos el codigo web en el momento.
+				String codigoPromocional=crearStringRandom(6);
+				if(codigoWeb.containsKey(codigoPromocional)){//Si hay una remota posibilidad de que el codigo ya se haya inventado, creamos otro con un caracter mas.
+					codigoPromocional=crearStringRandom(7);
+					}
 			
-			codigoWeb.put(codigoPromocional, false);
-			AlbumWeb nuevoAl= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);}
-			else if(tipoAlbum=="Extendido"){}
-		else {throw new Exception("El tipo de album no es valido");}
-		
+				codigoWeb.put(codigoPromocional, false);
+				AlbumWeb nuevoAlb= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);}
+			else if(tipoAlbum=="Extendido"){AlbumExtendido nuevoAlb= new AlbumExtendido(codigoUnico, nombre, dni);}
+			else {throw new Exception("El tipo de album no es valido");}
+		}
+
+		//si llego a este punto significa que no tiro la excepcion.Significa que el usuario no estaba registrado.
+		nuevoPart.setAlbumpropio(nuevoAlb);
+		DniToHash.put(dni,codigoUnico);
+		participantesConAlbumes.put(codigoUnico,nuevoPart);
 		return codigoUnico;
 		
 
@@ -112,7 +121,10 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 *  
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	boolean llenoAlbum(int dni){}
+	boolean llenoAlbum(int dni){
+		//por ahora lo hago asi, despues me fijo lo de lanzar la excepcion.
+		return participantesConAlbumes.get(DniToHash.get(dni)).completeElAlbum();
+	}
 
 	/**
 	 * Realiza el sorteo instantaneo con el codigo asociado al album 
