@@ -15,7 +15,7 @@ String nombre;
 
 T albumpropio5;
 public T getAlbumpropio(){return albumpropio5;}
-public void setAlbumpropio5(T alb){this.albumpropio5=alb;}
+public void setAlbumPropio(T alb){this.albumpropio5=alb;}
 
 
 

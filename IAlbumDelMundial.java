@@ -74,7 +74,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 		else{
 		//Primero elegimos el tipo de album:
 			if(tipoAlbum.equals("Tradicional")){AlbumTradicional nuevoAlb= new AlbumTradicional(codigoUnico, nombre, dni);
-				nuevoPart.setAlbumpropio5(nuevoAlb);}
+				nuevoPart.setAlbumPropio(nuevoAlb);}
 			
 			else if(tipoAlbum.equals("Web")){
 				//creamos el codigo web en el momento.
@@ -85,9 +85,9 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 			
 				codigoWeb.put(codigoPromocional, false);
 				AlbumWeb nuevoAlb= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);
-				nuevoPart.setAlbumpropio5(nuevoAlb);}
+				nuevoPart.setAlbumPropio(nuevoAlb);}
 			else if(tipoAlbum.equals("Extendido")){AlbumExtendido nuevoAlb= new AlbumExtendido(codigoUnico, nombre, dni);
-				nuevoPart.setAlbumpropio5(nuevoAlb);}
+				nuevoPart.setAlbumPropio(nuevoAlb);}
 			else {throw new RuntimeException("El tipo de album no es valido");}
 
 			//si llego a este punto significa que no tiro la excepcion.Significa que el usuario no estaba registrado.
