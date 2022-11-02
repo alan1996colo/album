@@ -4,7 +4,10 @@ import java.util.Map;
 
 public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
     Hashtable<Integer ,Usuario >participantesConAlbumes;
-    Figurita coleccionCompleta[];
+    Figurita coleccionCompleta[]={
+		Figurita = new Figurita ("leonel messi","Tradicional","Argentina",1, 0),
+		Figurita = new Figurita ("rogelio","Tradicional","Argentina",1, 1)//esto es momentaneo, mas tarde voy hacer que se vayan generando automaticamente.
+};
     Figurita coleccion20[];
 	Map<String, Boolean> codigoWeb = new HashMap<>();
 	Map<Integer,Integer> DniToHash= new HashMap<>();//La idea es hacer un diccionario, con los dnis y hash correspondientes, despues dado un dni consigo el hash y puedo buscar en el otro map.
@@ -95,7 +98,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 			// crea un numero al azar entre 
 			// 0 y coleccion completa length
 			int index
-			 = (int)(coleccionCompleta.length()
+			 = (int)(coleccionCompleta.length
 			   * Math.random());
 			Figurita nueva=(Figurita)coleccionCompleta[index].clone();// Hay que implementar clone en la clase Figurita
 			nueva.setTipo(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum()); //Hay que implementar setTipo en la clase Figurita
@@ -117,7 +120,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 			// crea un numero al azar entre 
 			// 0 y coleccion completa length
 			int index
-			 = (int)(coleccion20.length()
+			 = (int)(coleccion20.length
 			   * Math.random());
 			Figurita nueva=(Figurita)coleccion20[index].clone();// Hay que implementar clone en la clase Figurita
 			participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
@@ -144,7 +147,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 				// crea un numero al azar entre 
 				// 0 y coleccion completa length
 				int index
-				 = (int)(coleccionCompleta.length()
+				 = (int)(coleccionCompleta.length
 				   * Math.random());
 				Figurita nueva=(Figurita)coleccionCompleta[index].clone();// Hay que implementar clone en la clase Figurita
 				nueva.setTipo("Tradicional"); //Hay que implementar setTipo en la clase Figurita
