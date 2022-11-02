@@ -2,7 +2,7 @@ public class Figurita implements Cloneable{
 String nombre;
 String tipoDeFigu;//Tradicional,Web o Extendido.
 String pais;
-private int valorBase=10;//elijo un valor base de todas las figus.
+ int valorBase=10;//elijo un valor base de todas las figus.
 
 int rankingValorBase;//ranking de la figu
 int numeroQueIdentifica;//numero unico de la figurita
@@ -26,12 +26,14 @@ public float ValorFinal(){//metodo polimorfico, la subclase lo va modificar.
      */
 }
 public void setTipo(String tipoFigu){
-    if(tipoFigu!="Tradicional" & tipoFigu!="Extendido"&tipoFigu!="Web"){throw Exception("Error el tipo de figurita no es valido.");}
+   
+    if(tipoFigu==null||!tipoFigu.equals("Tradicional") & !tipoFigu.equals("Extendido")&!tipoFigu.equals("Web")){throw new RuntimeException("Error el tipo de figurita no es valido. o es nulo");}
     this.tipoDeFigu=tipoFigu;
 }
 
 @Override
-protected Object clone() throws CloneNotSupportedException {
+protected Object clone() //throws CloneNotSupportedException 
+{
   
     Figurita nueva= new Figurita (this.nombre,this.tipoDeFigu,this.pais,this.rankingValorBase, this.numeroQueIdentifica);
     return nueva;

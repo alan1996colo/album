@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface IAlbumDelMundial {
+public interface InterfazPublicaAlbumDelMundial {
 
 	/**
 	 * Registra un nuevo participante y devuelve el codigo unico del album

@@ -37,7 +37,7 @@ public class Fabrica {
 	////////////////////////////////////////////////////////////////////////
 
 	Album crearAlbumWeb() {
-        throw new RuntimeException("A Implementar");
+         new RuthrowntimeException("A Implementar");
 	}
 
 	Album crearAlbumExtendido() {

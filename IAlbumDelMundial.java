@@ -1,13 +1,29 @@
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.ArrayList;
+import Figurita;
+import AlbumTradicional;
+import AlbumWeb;
+import AlbumExtendido;
+import java.lang.Package;
 
-public class AlbumDelMundial implements interfazPublicAlbumDelMundial{
-    Hashtable<Integer ,Usuario >participantesConAlbumes;
+public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
+	public IAlbumDelMundial(){}
+    Hashtable<Integer ,Usuario >participantesConAlbumes=new Hashtable<>();
+
+	Figurita a= new Figurita ("leonel messi","Tradicional","Argentina",1, 0);
+	Figurita b= new Figurita ("asd ddsd","Tradicional","Argentina",1, 1);
+	Figurita c= new Figurita ("asww gbdf","Tradicional","Argentina",1, 2);
+
+	Figurita d= new Figurita ("ewe2 kjghj5","Tradicional","Argentina",1, 3);
+	Figurita e = new Figurita ("1wd nsss","Tradicional","Argentina",1, 4);
+
+
+	Figurita f= new Figurita ("rogelio","Tradicional","Argentina",1, 5);//esto es momentaneo, mas tarde voy hacer que se vayan generando automaticamente.
+
     Figurita coleccionCompleta[]={
-		Figurita = new Figurita ("leonel messi","Tradicional","Argentina",1, 0),
-		Figurita = new Figurita ("rogelio","Tradicional","Argentina",1, 1)//esto es momentaneo, mas tarde voy hacer que se vayan generando automaticamente.
-};
+		a,b,c,d,e,f};
     Figurita coleccion20[];
 	Map<String, Boolean> codigoWeb = new HashMap<>();
 	Map<Integer,Integer> DniToHash= new HashMap<>();//La idea es hacer un diccionario, con los dnis y hash correspondientes, despues dado un dni consigo el hash y puedo buscar en el otro map.
@@ -53,12 +69,14 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 		Usuario nuevoPart= new Usuario(dni, nombre);
 		int codigoUnico= nuevoPart.toString().hashCode();
 		if(participantesConAlbumes.containsKey(codigoUnico)){//reviso el maps, si el hashcode ya esta en uso, el participante ya esta registrado.
-			throw Exception("El participante, ya se encuentra registrado");
+			throw new RuntimeException("El participante, ya se encuentra registrado");
 		}
 		else{
 		//Primero elegimos el tipo de album:
-			if(tipoAlbum=="Tradicional"){AlbumTradicional nuevoAlb= new AlbumTradicional(codigoUnico, nombre, dni);}
-			else if(tipoAlbum=="Web"){
+			if(tipoAlbum.equals("Tradicional")){AlbumTradicional nuevoAlb= new AlbumTradicional(codigoUnico, nombre, dni);
+				nuevoPart.setAlbumpropio(nuevoAlb);}
+			
+			else if(tipoAlbum.equals("Web")){
 				//creamos el codigo web en el momento.
 				String codigoPromocional=crearStringRandom(6);
 				if(codigoWeb.containsKey(codigoPromocional)){//Si hay una remota posibilidad de que el codigo ya se haya inventado, creamos otro con un caracter mas.
@@ -66,20 +84,38 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 					}
 			
 				codigoWeb.put(codigoPromocional, false);
-				AlbumWeb nuevoAlb= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);}
-			else if(tipoAlbum=="Extendido"){AlbumExtendido nuevoAlb= new AlbumExtendido(codigoUnico, nombre, dni);}
-			else {throw new Exception("El tipo de album no es valido");}
-		}
+				AlbumWeb nuevoAlb= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);
+				nuevoPart.setAlbumpropio(nuevoAlb);}
+			else if(tipoAlbum.equals("Extendido")){AlbumExtendido nuevoAlb= new AlbumExtendido(codigoUnico, nombre, dni);
+				nuevoPart.setAlbumpropio(nuevoAlb);}
+			else {throw new RuntimeException("El tipo de album no es valido");}
 
-		//si llego a este punto significa que no tiro la excepcion.Significa que el usuario no estaba registrado.
-		nuevoPart.setAlbumpropio(nuevoAlb);
-		DniToHash.put(dni,codigoUnico);
-		participantesConAlbumes.put(codigoUnico,nuevoPart);
+			//si llego a este punto significa que no tiro la excepcion.Significa que el usuario no estaba registrado.
+		
+		}
+		Integer dniinteger= Integer.valueOf(dni);
+		Integer codigoUnicoInteger= Integer.valueOf(codigoUnico);
+		DniToHash.put(dniinteger,codigoUnicoInteger);
+		participantesConAlbumes.put(codigoUnicoInteger,nuevoPart);
+		
 		return codigoUnico;
 		
 
 	}
-
+private String saberTipoDeAlbum(int dni){
+	Integer dniInteger= Integer.valueOf(dni);
+	if(participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio()!=null){
+		return "Tradicional";
+	}
+	else if((participantesConAlbumes.get(DniToHash.get(dniInteger))).getAlbumpropi()!=null){
+		return "Web";
+	}
+	else if((participantesConAlbumes.get(DniToHash.get(dniInteger))).getAlbumprop()!=null){
+		return "Extendido";
+	}
+	System.out.println("Error en el metodo saberTipoDeAlbum");
+return "";
+}
 	/**
 	 * Se generan 4 figuritas al azar y 
 	 * se asocia al participante correspondiente identificado por dni
@@ -101,7 +137,11 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 			 = (int)(coleccionCompleta.length
 			   * Math.random());
 			Figurita nueva=(Figurita)coleccionCompleta[index].clone();// Hay que implementar clone en la clase Figurita
-			nueva.setTipo(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum()); //Hay que implementar setTipo en la clase Figurita
+			Integer dniInteger= Integer.valueOf(dni);
+			System.out.println(DniToHash.get(dniInteger) + " codigo hash del dni pàsado");
+			//necesito discernir entre que getAlbumProio usar.
+			
+			nueva.setTipo(saberTipoDeAlbum(dni)); //Hay que implementar setTipo en la clase Figurita
 			   participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
 			
 	}}
@@ -156,7 +196,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 		}
 
 		}
-		else throw Exception("Lo sentimos, el codigo web ya ha sido utilizado.");
+		else throw new RuntimeException("Lo sentimos, el codigo web ya ha sido utilizado.");
 
 
 	}
@@ -169,7 +209,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	public List<String> pegarFiguritas(int dni){
+	public ArrayList<String> pegarFiguritas(int dni){
 		return participantesConAlbumes.get(DniToHash.get(dni)).solicitarPegarFigus();
 
 
@@ -184,7 +224,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 *  
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	boolean llenoAlbum(int dni){
+	public boolean llenoAlbum(int dni){
 		//por ahora lo hago asi, despues me fijo lo de lanzar la excepcion.
 		return participantesConAlbumes.get(DniToHash.get(dni)).completeElAlbum();
 	}
@@ -197,7 +237,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * Si no tiene codigo para el sorteo o ya fue sorteado, se debe lanzar
 	 * una excepcion.
 	 */
-	String aplicarSorteoInstantaneo(int dni){}
+	public String aplicarSorteoInstantaneo(int dni){}
 
 	/**
 	 * Busca si el participante tiene alguna figurita repetida y devuelve 
@@ -206,7 +246,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 *  
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	int buscarFiguritaRepetida(int dni){}
+	public int buscarFiguritaRepetida(int dni){}
 
 	/**
 	 * Dado el dni de un participante A y el codigo de una figurita, 
@@ -220,7 +260,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * Si el participante no está registrado o no es dueño de la figurita a 
 	 * cambiar, se debe lanzar una excepción.
 	 */
-	boolean intercambiar(int dni, int codFigurita){}
+	public boolean intercambiar(int dni, int codFigurita){}
 	
 	/**
 	 * Dado el dni de un participante, busca una figurita repetida e intenta 
@@ -229,14 +269,14 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	boolean intercambiarUnaFiguritaRepetida(int dni){}
+	public boolean intercambiarUnaFiguritaRepetida(int dni){}
 
 	/**
 	 * Dado el dni de un participante, se devuelve el nombre del mismo.
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	String darNombre(int dni){}
+	public String darNombre(int dni){}
 
 	/**
 	 * Dado el dni de un participante, devuelve el premio correspondiente 
@@ -245,7 +285,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * Si el participante no está registrado, se debe lanzar una excepcion.
 	 * Si no tiene el album completo, se debe lanzar una excepcion.
 	 */
-	String darPremio(int dni){}
+	public String darPremio(int dni){}
 
 	/**
 	 * Devuelve un string con la lista de todos los participantes que 
@@ -253,7 +293,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * El listado debe respetar el siguiente formato para cada ganador:
 	 *     " - ($dni) $nombre: $premio"
 	 */
-	String listadoDeGanadores(){}
+	public String listadoDeGanadores(){}
 	
 	/**
 	 * Devuelve una lista con todos los participantes que llenaron el pais
@@ -262,7 +302,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	 * De cada participante se devuelve el siguiente String: 
 	 *     "($dni) $nombre: $tipoAlbum"
 	 */
-	 List<String> participantesQueCompletaronElPais(String nombrePais){}
+	 public ArrayList<String> participantesQueCompletaronElPais(String nombrePais){}
 
-    
+   
 }

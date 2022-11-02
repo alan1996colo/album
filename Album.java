@@ -1,21 +1,19 @@
 import java.util.ArrayList;
 import java.util.Map;
-
+import java.util.HashMap;
 public abstract class Album {
-    String tipoAlbum;
-    public String getTipoAlbum() {
-        return tipoAlbum;
-    }
+    //String tipoAlbum;
+    
 
 
 
 
     int cantPaises=32;//esto quizas lo saquemos por lo de la fabrica
-    String codigoUnico;
+    int codigoUnico;
     int dniDueño;//esto quizas despues lo saquemos
     String nombreDueño;
     Figurita coleccion[];
-    ArrayList<Figurita> figuritasSinpegar;
+    ArrayList<Figurita> figuritasSinpegar=new ArrayList<>();
     int cantJugadores=12;//esto quizas lo quitamos por lo de la fabrica.
     Map<String ,Boolean> paisesCompletos=new HashMap<String,Boolean>() ;
     String premioFinal;
@@ -30,7 +28,7 @@ public abstract class Album {
      * Agrega una figurita a la lista de figuritas sin pegar
      * @param figu
      */
-    public void agregarFigu(Figurita figu){figuritasSinpegar.append(figu);}
+    public void agregarFigu(Figurita figu){figuritasSinpegar.add(figu);}
     public List<String>  verificarYpegarFigus(){//Falta implementar xd
     };
     public void mostrarSinpegar(){};
