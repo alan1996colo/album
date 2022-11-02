@@ -4,7 +4,11 @@ import java.util.HashMap;
 public abstract class Album {
     //String tipoAlbum;
     
-
+    String tipoAlbum;
+    public String getTipoAlbum() {
+        System.out.println("se ejecuto el metodo get delpadre");
+      return this.tipoAlbum;
+   }
 
 
 
@@ -31,7 +35,9 @@ public abstract class Album {
     public void agregarFigu(Figurita figu){figuritasSinpegar.add(figu);}
     public List<String>  verificarYpegarFigus(){//Falta implementar xd
     };
-    public void mostrarSinpegar(){};
+    public void mostrarSinpegar(){
+        System.out.println(figuritasSinpegar.toString());
+    };
     public void mostrarRepetidas(){};
 
 

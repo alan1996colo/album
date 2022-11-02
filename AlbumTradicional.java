@@ -1,6 +1,7 @@
 public class AlbumTradicional extends Album{
  String tipoAlbum="Tradicional";
  public String getTipoAlbum() {
+   System.out.println("se ejecuto el metodo del tradicional");
    return this.tipoAlbum;
 }
 

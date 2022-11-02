@@ -9,30 +9,14 @@ import java.util.Set;
 
 import javax.swing.table.TableRowSorter;
 
-public class Usuario{
+public class Usuario <T extends Album>{//el Atributo album propio puede ser cualquier tipo de album
 int dni;
 String nombre;
-AlbumTradicional albumpropio;
-AlbumExtendido albumpropio1;
-AlbumWeb albumpropio2;
-public AlbumTradicional getAlbumpropio() {
-    return this.albumpropio;
-}
-public AlbumExtendido getAlbumpropi() {
-    return this.albumpropio1;
-}
 
-public AlbumWeb getAlbumprop() {
-    return this.albumpropio2;
-}//Esto no me gusta, per no encuentro la forma de que almacene un dato de tipo T o tipo Album, y que despues se transforme en lo que quiero
-//asi que termino almacenando los 3 tipos de albumes
+T albumpropio5;
+public T getAlbumpropio(){return albumpropio5;}
+public void setAlbumpropio5(T alb){this.albumpropio5=alb;}
 
-
-
-
-public void setAlbumpropio(AlbumTradicional alb){this.albumpropio=alb;}
-public void setAlbumpropio(AlbumWeb alb){this.albumpropio2=alb;}
-public void setAlbumpropio(AlbumExtendido alb){this.albumpropio1=alb;}
 
 
 public Usuario(int dni, String nombre){

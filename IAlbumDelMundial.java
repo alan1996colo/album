@@ -74,7 +74,7 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 		else{
 		//Primero elegimos el tipo de album:
 			if(tipoAlbum.equals("Tradicional")){AlbumTradicional nuevoAlb= new AlbumTradicional(codigoUnico, nombre, dni);
-				nuevoPart.setAlbumpropio(nuevoAlb);}
+				nuevoPart.setAlbumpropio5(nuevoAlb);}
 			
 			else if(tipoAlbum.equals("Web")){
 				//creamos el codigo web en el momento.
@@ -85,9 +85,9 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 			
 				codigoWeb.put(codigoPromocional, false);
 				AlbumWeb nuevoAlb= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);
-				nuevoPart.setAlbumpropio(nuevoAlb);}
+				nuevoPart.setAlbumpropio5(nuevoAlb);}
 			else if(tipoAlbum.equals("Extendido")){AlbumExtendido nuevoAlb= new AlbumExtendido(codigoUnico, nombre, dni);
-				nuevoPart.setAlbumpropio(nuevoAlb);}
+				nuevoPart.setAlbumpropio5(nuevoAlb);}
 			else {throw new RuntimeException("El tipo de album no es valido");}
 
 			//si llego a este punto significa que no tiro la excepcion.Significa que el usuario no estaba registrado.
@@ -102,16 +102,15 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 		
 
 	}
+	/**
+	 * Busca el tipo de album de un participante dado un dni.
+	 * @param dni
+	 * @return
+	 */
 private String saberTipoDeAlbum(int dni){
-	Integer dniInteger= Integer.valueOf(dni);
+	Integer dniInteger= Integer.valueOf(dni);//esto de castear dni int a Integer realmente no se si es necesario.
 	if(participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio()!=null){
-		return "Tradicional";
-	}
-	else if((participantesConAlbumes.get(DniToHash.get(dniInteger))).getAlbumpropi()!=null){
-		return "Web";
-	}
-	else if((participantesConAlbumes.get(DniToHash.get(dniInteger))).getAlbumprop()!=null){
-		return "Extendido";
+		return participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio().getTipoAlbum();
 	}
 	System.out.println("Error en el metodo saberTipoDeAlbum");
 return "";
@@ -201,6 +200,13 @@ return "";
 
 	}
 
+public void mostrarSinpegar(int dni){
+	participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().mostrarSinpegar();
+}
+
+
+
+
 	/**
 	 * Busca entre las figuritas del participante cuales aún no están en el 
 	 * album y las asocia.
@@ -209,7 +215,7 @@ return "";
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	public ArrayList<String> pegarFiguritas(int dni){
+	public List<String> pegarFiguritas(int dni){
 		return participantesConAlbumes.get(DniToHash.get(dni)).solicitarPegarFigus();
 
 
@@ -302,7 +308,7 @@ return "";
 	 * De cada participante se devuelve el siguiente String: 
 	 *     "($dni) $nombre: $tipoAlbum"
 	 */
-	 public ArrayList<String> participantesQueCompletaronElPais(String nombrePais){}
+	 public List<String> participantesQueCompletaronElPais(String nombrePais){}
 
    
 }

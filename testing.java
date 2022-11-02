@@ -4,7 +4,10 @@ public class testing{
             IAlbumDelMundial sistema = new IAlbumDelMundial();
             
             sistema.registrarParticipante(222222, "Christian", "Tradicional");
-            System.out.print("llego a ejecutarse\n");
+            System.out.print("..\n");
             sistema.comprarFiguritas(222222);
+            System.out.print("llego a ejecutarse\n");
+            sistema.mostrarSinpegar(222222);
+
     }
 }
