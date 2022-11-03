@@ -1,3 +1,4 @@
+
 public class AlbumExtendido extends AlbumTradicional{
     public AlbumExtendido(int codigoUnico, String nombreDueño, int dniDueño) {
         super(codigoUnico, nombreDueño, dniDueño);

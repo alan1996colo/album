@@ -6,6 +6,9 @@ String pais;
 
 int rankingValorBase;//ranking de la figu
 int numeroQueIdentifica;//numero unico de la figurita
+public int getNumeroQueIdentifica() {
+    return numeroQueIdentifica;
+}
 public Figurita(String nombre,String tipoDeFigu, String pais,int rankingValorBase,  int numeroQueIdentifica){
     this.nombre=nombre;
     this.tipoDeFigu=tipoDeFigu;
@@ -43,5 +46,14 @@ protected Object clone() //throws CloneNotSupportedException
     Figurita nueva= new Figurita (this.nombre,this.tipoDeFigu,this.pais,this.rankingValorBase, this.numeroQueIdentifica);
     return nueva;
   }
+
+
+  public boolean equals(Object o){//Implementamos el equals como se enseño en clase para no tener problemas de hashs en referencias.
+    if(this==o) return true;
+    if(o==null) return false;
+    if(this.getClass()!=o.getClass())return false;
+    Figurita other=(Figurita) o;  
+    return (this.getNumeroQueIdentifica()==other.getNumeroQueIdentifica());
+}
 
 }

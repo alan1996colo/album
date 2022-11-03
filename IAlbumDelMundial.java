@@ -2,10 +2,11 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.ArrayList;
-import Figurita;
-import AlbumTradicional;
-import AlbumWeb;
-import AlbumExtendido;
+import java.util.List;
+//import Figurita;
+//import AlbumTradicional;
+//import AlbumWeb;
+//import AlbumExtendido;
 import java.lang.Package;
 
 public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
@@ -215,8 +216,10 @@ public void mostrarSinpegar(int dni){
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	public List<String> pegarFiguritas(int dni){
-		return participantesConAlbumes.get(DniToHash.get(dni)).solicitarPegarFigus();
+	public List<String> pegarFiguritas(int dni){//Excepcion a implementar..
+		//probando si era necesario castear a Integer
+		Integer dniInteger=Integer.valueOf(dni);
+		return participantesConAlbumes.get(DniToHash.get(dniInteger)).solicitarPegarFigus();
 
 
 

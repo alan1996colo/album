@@ -4,18 +4,22 @@
 //AlbumDelMundial<--->Usuario-->Album{Tradicional,Web,Extendido} 
 
 
+import java.util.List;
 
 import java.util.Set;
 
 import javax.swing.table.TableRowSorter;
 
-public class Usuario <T extends Album>{//el Atributo album propio puede ser cualquier tipo de album
+public class Usuario <T extends Album> implements Comparable<Usuario>{//el Atributo album propio puede ser cualquier tipo de album
 int dni;
+public int getDni() {
+    return dni;
+}
 String nombre;
 
-T albumpropio5;
-public T getAlbumpropio(){return albumpropio5;}
-public void setAlbumPropio(T alb){this.albumpropio5=alb;}
+T albumpropio;
+public T getAlbumpropio(){return albumpropio;}
+public void setAlbumPropio(T alb){this.albumpropio=alb;}
 
 
 
@@ -30,7 +34,7 @@ void comprarFigus(String tipoDeFigu){}
 void vermicodigoweb(){}
 void comprarfigusconcodigoweb(){}
 List<String>  solicitarPegarFigus(){
-    return albumpropio.verificarYpegarFigus();
+    return this.albumpropio.verificarYpegarFigus();
 }
 /**
  * Le pregunta al album si esta completo, True =Si, False=No.
@@ -38,9 +42,18 @@ List<String>  solicitarPegarFigus(){
 boolean completeElAlbum(){
     return this.albumpropio.isAlbumCompleto();
 }
+public int compareTo(Usuario otro){//no creo que lo llegue a usar pero, no esta de mas(?)
+    return (otro.getDni()-this.getDni());
+}
+public boolean equals(Object o){//Implementamos el equals como se enseño en clase para no tener problemas de hashs en referencias.
+    if(this==o) return true;
+    if(o==null) return false;
+    if(this.getClass()!=o.getClass())return false;
+    Usuario other=(Usuario) o;  
+    return (this.getDni()==other.getDni());
+}
 void solicitarPremio(){}
-public String toString()
-{return this.nombre +" "+String.valueOf(this.dni);}
+public String toString(){return this.nombre +" "+String.valueOf(this.dni);}
 boolean solicitarIntercambio(String nombreFigu){return false;}
 void verMisFigusRepet(){}
 void mostrarSinpegar(){}
