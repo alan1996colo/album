@@ -9,7 +9,12 @@ public String getTipoDeFigu() {
 
 
 String pais;
- int valorBase=10;//elijo un valor base de todas las figus.
+ public String getPais() {
+    return pais;
+}
+
+
+int valorBase=10;//elijo un valor base de todas las figus.
 
 int rankingValorBase;//ranking de la figu
 int numeroQueIdentifica;//numero unico de la figurita

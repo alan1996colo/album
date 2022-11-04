@@ -2,8 +2,8 @@
 
 //Diseño actual
 //AlbumDelMundial<--->Usuario-->Album{Tradicional,Web,Extendido} 
-
 package albumes;
+
 import java.util.List;
 
 import java.util.Set;

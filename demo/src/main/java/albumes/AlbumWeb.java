@@ -5,7 +5,7 @@ String codigoWeb;
 //String tipoAlbum="Web";
 
 public String getCodigoWeb() {
-    return codigoWeb;
+    return this.codigoWeb;
 }
 
 

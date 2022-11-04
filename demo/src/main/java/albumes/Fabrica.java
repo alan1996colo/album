@@ -1,9 +1,10 @@
+package albumes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-package albumes;
+
 
 
 public class Fabrica {
@@ -12,7 +13,7 @@ public class Fabrica {
 	private Random random;
 
 	private String[] premiosInstantaneos;
-	private String[] paisesParticipantes;
+	private String[] paisesParticipantes;//esto va setear los paises participantes en la clase del
 	private int lugaresPorPais;
 	private String[] listadoDeMundialesTop10;
 	private Map<String, String[]> balonYPaisPorMundialTop10;
@@ -44,12 +45,12 @@ public class Fabrica {
 
 	Album crearAlbumExtendido(int codigoUnico,String nombre,int dni) {
         if(codigoUnico==0||nombre.length()>30||dni<0||dni>99999999){throw new RuntimeException("Error: se esta intentando construir un albumExtendido con parametros incorrectos.\n");}
-		return new AlbumExtendido(codigoUnico, nombre, dni);
+		return new AlbumExtendido(codigoUnico, nombre, dni,this.paisesParticipantes);
 	}
 
 	Album crearAlbumTradicional(int codigoUnico,String nombre,int dni) {
 		if(codigoUnico==0||nombre.length()>30||dni<0||dni>99999999){throw new RuntimeException("Error: se esta intentando construir un albumTradicional con parametros incorrectos.\n");}
-		return new AlbumTradicional(codigoUnico, nombre, dni);
+		return new AlbumTradicional(codigoUnico, nombre, dni,this.paisesParticipantes);
 		
 	}
 

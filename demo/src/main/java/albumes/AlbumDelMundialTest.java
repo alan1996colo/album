@@ -1,5 +1,5 @@
 package albumes;
-
+import albumes.IAlbumDelMundial;
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class AlbumDelMundialTest {
 
 	@Before
 	public void setUp() throws Exception {
-		sistema = new AlbumDelMundial();
+		sistema = new IAlbumDelMundial();
 		sistema.registrarParticipante(1111, "Andres", TIPO_TRADICIONAL);
 		dniConAlbumTradicional = 1111;
 		

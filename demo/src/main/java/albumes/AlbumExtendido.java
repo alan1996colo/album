@@ -2,8 +2,8 @@ package albumes;
 
 
 public class AlbumExtendido extends AlbumTradicional{
-    public AlbumExtendido(int codigoUnico, String nombreDueño, int dniDueño) {
-        super(codigoUnico, nombreDueño, dniDueño);
+    public AlbumExtendido(int codigoUnico, String nombreDueño, int dniDueño,String paisesParticipantes[]) {
+        super(codigoUnico, nombreDueño, dniDueño,paisesParticipantes);
         //TODO Auto-generated constructor stub
         this.tipoAlbum="Extendido";
 

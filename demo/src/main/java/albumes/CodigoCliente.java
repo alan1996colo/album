@@ -1,12 +1,15 @@
-import java.util.List;
 package albumes;
+//se logro modificar
+import albumes.IAlbumDelMundial;
+import java.util.List;
+
 
 
 public class CodigoCliente {
 
 	public static void main(String[] args) {
 
-		IAlbumDelMundial sistema = new AlbumDelMundial();
+		IAlbumDelMundial sistema = new IAlbumDelMundial();
 		
 		sistema.registrarParticipante(222222, "Christian", "Tradicional");
 		sistema.registrarParticipante(333333, "Mariana", "Extendido");

@@ -9,7 +9,7 @@ public class FiguritaTop10 extends Figurita{
     }
 
 
-    public FiguritasTop10(String nombre,String tipoDeFigu, String pais,int rankingValorBase,  int numeroQueIdentifica,String sedeMundial,int año, String balonde){
+    public FiguritaTop10(String nombre,String tipoDeFigu, String pais,int rankingValorBase,  int numeroQueIdentifica,String sedeMundial,int año, String balonde){
         this.nombre=nombre;
         this.tipoDeFigu=tipoDeFigu;
         this.pais=pais;

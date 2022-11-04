@@ -9,17 +9,23 @@ import java.util.List;
 import java.util.ListIterator;
 public abstract class Album {
     //String tipoAlbum;
+    //String codigoWeb;
     
     String tipoAlbum;
     int cantPaises=32;//esto quizas lo saquemos por lo de la fabrica
     int cantJugadores=12;
-    int codigoUnico;
+    int codigoUnico;//Esto se usa para sortear el premio instantaneo
     int dniDueño;//esto quizas despues lo saquemos
     String nombreDueño;
     Figurita coleccion[]=new Figurita[cantPaises*cantJugadores];
     ArrayList<Figurita> figuritasSinpegar=new ArrayList<>();
     //esto quizas lo quitamos por lo de la fabrica.
-    Map<String ,Boolean> paisesCompletos=new HashMap<String,Boolean>() ;
+    Map<String ,Boolean> paisesCompletos=new HashMap<String,Boolean>() ; 
+    
+    //descatado:---/Uso un solo map con integers
+    // el map me devuelve la posicion del pais y si la posicion es -1 significa que el pais esta completo.
+
+    
     String premioFinal;
     boolean AlbumCompleto=false;
 
@@ -42,6 +48,29 @@ public abstract class Album {
  * True,y si ademas toda los paises estan completos cambia el estado de AlbumCompleto a True;
  */
 private void verificar(){
+    boolean albumcompleto=true;//esto va decir si se completo el album
+    if(this.coleccion.length<1){albumcompleto=false;}//si por alguna razon no quiere entrar en el array, me aseguro que diga que esta incompleto
+    int contador=0;
+    for(int i=0;i<this.coleccion.length;i++){
+        if(i%12==0){contador=0;}//si paso de pagina se resetea el contador
+        if(this.coleccion[i]!=null){
+            contador=contador+1;
+        }
+        else{contador=0;//si encuentro una figu nula ,se resetea el contador.
+            albumcompleto=false;//y va decir que esta incompleto
+        }
+       
+        if(contador==12){
+            paisesCompletos.put(this.coleccion[i].getPais(), true);
+            contador=0;//Esto quizas sea redundante porque si es igual a 12 quiere decir que pase de pagina.
+        }
+    
+    
+
+}
+//cuando llego a este punto el booleano ya deberia haber cambiado a false, o directamente estar en true como desde el principio.
+
+ this.AlbumCompleto=albumcompleto;
 
 
 }
