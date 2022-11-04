@@ -9,6 +9,10 @@ public class AlbumTradicional extends Album{
         this.codigoUnico=codigoUnico;
         this.nombreDueño=nombreDueño;
         this.dniDueño=dniDueño;
+        for(int i=0;i<generarPaisesClasificados().length;i++){//construyo el maps de paises con el array de fabrica 
+         this.paisesCompletos.put(generarPaisesClasificados()[i],false);
+        }
+        
      }
 
 

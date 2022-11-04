@@ -1,6 +1,11 @@
 public class Figurita implements Cloneable{
 String nombre;
 String tipoDeFigu;//Tradicional,Web o Extendido.
+public String getTipoDeFigu() {
+    return tipoDeFigu;
+}
+
+
 String pais;
  int valorBase=10;//elijo un valor base de todas las figus.
 

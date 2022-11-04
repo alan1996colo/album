@@ -3,10 +3,10 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
-//import Figurita;
-//import AlbumTradicional;
-//import AlbumWeb;
-//import AlbumExtendido;
+import Figurita;
+import AlbumTradicional;
+import AlbumWeb;
+import AlbumExtendido;
 import java.lang.Package;
 
 public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
