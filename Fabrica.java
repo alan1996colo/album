@@ -36,16 +36,20 @@ public class Fabrica {
 	//       tendrá una figurita en particula.                            //
 	////////////////////////////////////////////////////////////////////////
 
-	Album crearAlbumWeb() {
-         new RuthrowntimeException("A Implementar");
+	Album crearAlbumWeb(String codigoPromocional,int codigoUnico,String nombre,int dni) {
+         if(codigoPromocional.length()<6||codigoPromocional.length()>8||codigoUnico==0||nombre.length()>30||dni<0||99999999<dni){throw new RuntimeException("Error: se esta intentando construir un albumWeb con parametros incorrectos.\n");}
+		return new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);
 	}
 
-	Album crearAlbumExtendido() {
-        throw new RuntimeException("A Implementar");
+	Album crearAlbumExtendido(int codigoUnico,String nombre,int dni) {
+        if(codigoUnico==0||nombre.length()>30||dni<0||dni>99999999){throw new RuntimeException("Error: se esta intentando construir un albumExtendido con parametros incorrectos.\n");}
+		return new AlbumExtendido(codigoUnico, nombre, dni);
 	}
 
-	Album crearAlbumTradicional() {
-		throw new RuntimeException("A Implementar");
+	Album crearAlbumTradicional(int codigoUnico,String nombre,int dni) {
+		if(codigoUnico==0||nombre.length()>30||dni<0||dni>99999999){throw new RuntimeException("Error: se esta intentando construir un albumTradicional con parametros incorrectos.\n");}
+		return new AlbumTradicional(codigoUnico, nombre, dni);
+		
 	}
 
 	List<Figurita> generarSobre(int cantFigus) {

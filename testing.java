@@ -9,7 +9,7 @@ public class testing{
         
             IAlbumDelMundial sistema = new IAlbumDelMundial();
             
-            sistema.registrarParticipante(222222, "Christian", "Tradicional");
+            sistema.registrarParticipante(222222, "Christian", "Web");
             System.out.print("..\n");
             sistema.comprarFiguritas(222222);
             System.out.print("Figuritas sin pegar:\n");

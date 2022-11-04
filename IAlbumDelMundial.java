@@ -10,6 +10,7 @@ import AlbumExtendido;
 import java.lang.Package;
 
 public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
+	Fabrica factory=new Fabrica();
 	public IAlbumDelMundial(){}
     Hashtable<Integer ,Usuario >participantesConAlbumes=new Hashtable<>();
 
@@ -72,9 +73,9 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 		if(participantesConAlbumes.containsKey(codigoUnico)){//reviso el maps, si el hashcode ya esta en uso, el participante ya esta registrado.
 			throw new RuntimeException("El participante, ya se encuentra registrado");
 		}
-		else{
+		else{ Album nuevoAlb;
 		//Primero elegimos el tipo de album:
-			if(tipoAlbum.equals("Tradicional")){AlbumTradicional nuevoAlb= new AlbumTradicional(codigoUnico, nombre, dni);
+			if(tipoAlbum.equals("Tradicional")){ nuevoAlb= factory.crearAlbumTradicional(codigoUnico, nombre, dni);
 				nuevoPart.setAlbumPropio(nuevoAlb);}
 			
 			else if(tipoAlbum.equals("Web")){
@@ -85,9 +86,9 @@ public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 					}
 			
 				codigoWeb.put(codigoPromocional, false);
-				AlbumWeb nuevoAlb= new AlbumWeb(codigoPromocional, codigoUnico, nombre, dni);
+				nuevoAlb= factory.crearAlbumWeb(codigoPromocional, codigoUnico, nombre, dni);
 				nuevoPart.setAlbumPropio(nuevoAlb);}
-			else if(tipoAlbum.equals("Extendido")){AlbumExtendido nuevoAlb= new AlbumExtendido(codigoUnico, nombre, dni);
+			else if(tipoAlbum.equals("Extendido")){ nuevoAlb= factory.crearAlbumExtendido(codigoUnico, nombre, dni);
 				nuevoPart.setAlbumPropio(nuevoAlb);}
 			else {throw new RuntimeException("El tipo de album no es valido");}
 
