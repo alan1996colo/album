@@ -17,6 +17,9 @@ public int getDni() {
 }
 String nombre;
 
+public String getNombre() {
+    return nombre;
+}
 T albumpropio;
 public T getAlbumpropio(){return albumpropio;}
 public void setAlbumPropio(T alb){this.albumpropio=alb;}

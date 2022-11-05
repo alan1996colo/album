@@ -18,7 +18,11 @@ public class Fabrica {
 	private String[] listadoDeMundialesTop10;
 	private Map<String, String[]> balonYPaisPorMundialTop10;
 	private Map<String, Integer> ranking;
-
+	//esto de nombre y apellidos es para generar figus que vayan intercalando nombres y apellidos
+	private String[] nombres=new String[]{"Emiliano","Gerónimo","Franco","Nahuel","Gonzalo","Cristian","Germán","Nicolás","Lisandro","Marcos","Rodrigo","Leandro","Lionel","Alexis","Guido","Alejandro","Enzo","Exequiel","Lautaro","Ángel"};
+	private String[] apellidos=new String[]{"Gómez","Fernández","Palacios","Messi","Martínez","Di María","Álvarez","González","Correa","Dybala","Foyth","Lo Celso","Almada","Rodríguez","Mac Allister","Paredes","De Paul","Tagliafico","Acuña","Rulli","Montiel"};
+	private Figurita[] coleccion=new Figurita[404];
+	private FiguritaTop10[] coleccion20=new FiguritaTop10[20];
 	Fabrica() {
 		random = new Random(System.currentTimeMillis());
 		lugaresPorPais = 12;
@@ -27,6 +31,7 @@ public class Fabrica {
 		balonYPaisPorMundialTop10 = generarPaisesPorMundial();
 		ranking = generarRanking();
 		premiosInstantaneos = generarPremiosParaSorteoInstantaneo();
+		coleccion= generarColeccionCompleta();
 	}
 	
 	////////////////////////////////////////////////////////////////////////
@@ -54,8 +59,18 @@ public class Fabrica {
 		
 	}
 
-	List<Figurita> generarSobre(int cantFigus) {
-		throw new RuntimeException("A Implementar");
+	ArrayList<Figurita> generarSobre(int cantFigus) {
+		ArrayList <Figurita> sobre=new ArrayList<>();
+		int hasta=cantFigus;
+		while(hasta>0){
+			int rand=(int)( 383*Math.random());
+			
+			Figurita nueva=(Figurita) this.coleccion[rand].clone();
+			sobre.add(nueva);
+			hasta=hasta-1;
+		}
+		return sobre;
+		//throw new RuntimeException("A Implementar");
 	}		
 
 	List<Figurita> generarSobreTop10(int cantFigus) {
@@ -71,6 +86,37 @@ public class Fabrica {
 	// cual es su valor base simbobilo.
 	private int calcularValorBase(String pais, int numero) {
 		return ranking.get(pais) + numero;
+	}
+	private Figurita[] generarColeccionCompleta(){
+		StringBuilder nombre=new StringBuilder();
+		Figurita[] coleccioncompleta=new Figurita[404];
+		int contandoPaises=0;
+		for(int i=0;i<this.nombres.length;i++){
+			nombre.append(this.nombres[i]);
+			for(int j=0;j<this.apellidos.length;j++){
+				
+				nombre.append(" "+this.apellidos[j]);
+				if(contandoPaises/12<32){Figurita nueva= new Figurita(nombre.toString(), null, paisesParticipantes[contandoPaises/12], ranking.get(paisesParticipantes[contandoPaises/12]), contandoPaises);
+					coleccioncompleta[contandoPaises]=nueva;
+						
+					contandoPaises=contandoPaises+1;}
+					else{
+
+						String paisss=generarListadoDeMundiales()[(contandoPaises-404)/2];
+						//aca creo las figuritas top10
+						FiguritaTop10 nuevo=new FiguritaTop10(nombre.toString(), "Extendido", balonYPaisPorMundialTop10.get(paisss)[(contandoPaises-404)%2], ranking.get(balonYPaisPorMundialTop10.get(paisss)[(contandoPaises-404)%2]), contandoPaises-404);
+
+
+
+					}
+				
+				
+				
+			}
+
+		}
+		return coleccioncompleta;
+
 	}
 
 	private String[] generarPremiosParaSorteoInstantaneo() {

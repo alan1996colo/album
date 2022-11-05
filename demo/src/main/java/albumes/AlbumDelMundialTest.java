@@ -35,7 +35,47 @@ public class AlbumDelMundialTest {
 		sistema.registrarParticipante(4444, "Pancho", TIPO_TRADICIONAL);
 		
 		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+//Nota, este test lo modifique por el test 10 y 11, que necesitaba figuritas repetidas,
+// y comprar una sola vez no era suficiente para que haya figus repetidas siempre
+//por lo que en ocasiones daba Bien y otras mal asi que le puse suficientes compras como para que haya algo repetido.
 		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(4444);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+		sistema.comprarFiguritas(1111);
+
 		
 	}
 	

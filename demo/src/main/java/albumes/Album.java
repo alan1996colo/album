@@ -26,7 +26,7 @@ public abstract class Album {
     // el map me devuelve la posicion del pais y si la posicion es -1 significa que el pais esta completo.
 
     
-    String premioFinal;
+    boolean premioFinal=false;
     boolean AlbumCompleto=false;
 
     public Album(){
@@ -41,7 +41,7 @@ public abstract class Album {
     public boolean isAlbumCompleto() {
         return AlbumCompleto;
     }
-    public abstract void premioFinal();
+    public abstract String darpremioFinal();
     public String toString(){return "";}
 /**
  * Revisa el album en las secciones que aun no esta completo y si se encuentran completas cambia el estado del map paises completos a 
@@ -64,15 +64,9 @@ private void verificar(){
             paisesCompletos.put(this.coleccion[i].getPais(), true);
             contador=0;//Esto quizas sea redundante porque si es igual a 12 quiere decir que pase de pagina.
         }
-    
-    
-
-}
-//cuando llego a este punto el booleano ya deberia haber cambiado a false, o directamente estar en true como desde el principio.
-
- this.AlbumCompleto=albumcompleto;
-
-
+    }
+    //cuando llego a este punto el booleano ya deberia haber cambiado a false, o directamente estar en true como desde el principio.
+    this.AlbumCompleto=albumcompleto;
 }
 
 
@@ -81,6 +75,7 @@ private void verificar(){
      * @param figu
      */
     public void agregarFigu(Figurita figu){figuritasSinpegar.add(figu);}
+    public void quitarFigu(Figurita figu){figuritasSinpegar.remove(figu);}
     /**Revisa si el album esta completo   
      * si no revisa las figuritas de la lista de figuritas sin pegar que sean del mismo tipo del álbum actual,
      *  y revisa si es posible colocarlas en la coleccion[], si es posible, “pega” 
@@ -115,6 +110,7 @@ private void verificar(){
             
         }
         //System.out.println("Cant veces entro en while = "+checkPoint);
+        verificar();//obviamente despues de pegar las figus, verificamos si completamos el album y cambiamos el estado
         return ret;
 
             //falta implementar la parte de verificar si el album esta completo y cambiar el estado booleano de AlbumCOmpleto
@@ -127,12 +123,82 @@ private void verificar(){
     public void mostrarSinpegar(){
         System.out.println(figuritasSinpegar.toString());
     };
-    public void mostrarRepetidas(){};
+
+    private boolean estaRepetidaEnsinPegar(Figurita figu){//revisa si esta repetida entre las sin pegar
+        int cont=0;
+        for (Figurita iter : figuritasSinpegar) {
+            if(figu.equals(iter)){
+                cont=cont+1;
+            }
+            if(cont>1){return true;}
+         }
+    return false;}
+
+
+    /**
+     * Busca en las figus sin pegar si hay alguna repetida y devuelve el codigo de la primera que encuentre.
+     */
+    public int buscarRepetidas(){
+        for (Figurita iter : figuritasSinpegar) {
+            if(this.contains(iter)||estaRepetidaEnsinPegar(iter)){
+                return iter.getNumeroQueIdentifica();
+            }
+            
+        }
+        return -1;
+    };
+
+    /**
+     * Muestra si el album tiene la figu pegada.
+     * @param figu
+     * @return
+     */
+    public boolean contains(Figurita figu){
+        if(coleccion[figu.getNumeroQueIdentifica()]!=null){//si la posicion no es null, esta ocupada por una carta, que deberia ser la correcta.
+            return true;
+        }
+
+        return false;
+    }
+    public boolean containsFiguSinPegar(int numFigu){
+        for (Figurita figurita : figuritasSinpegar) {
+            if(figurita.getNumeroQueIdentifica()==numFigu){
+                return true;
+            }
+            //Se me ocurre un problema en el que el tipo de figuritas sea distinto al de
+            //la persona a la que se la voy a cambiar, mas adelante veo como lo soluciono
+            //quizas se solucione en otro metodo.
+        }
+        return false;
+    }
+    public ArrayList<Figurita> figusRepetidas(){
+        ArrayList<Figurita> figuritasRep=new ArrayList<>();
+        for (Figurita iter : figuritasSinpegar) {
+            if(estaRepetidaEnsinPegar(iter)||this.contains(iter)){
+                Figurita clon=(Figurita)iter.clone();
+                figuritasRep.add(clon);//por las dudas no vaya a ser que modifique el arrayList original, despues lo veo.
+            }
+            
+        }
+        return figuritasRep;
+
+
+        
+    }
+    public Figurita getFigurita(int numFig){
+        for (Figurita iterable_element : figuritasSinpegar) {
+            if(iterable_element.getNumeroQueIdentifica()==numFig){
+                return iterable_element;
+            }
+            
+        }
+        return null;
+    }
 
 
 
 
-     public static void main(String[] args) {System.out.println("jajaja");
+     public static void main(String[] args) {System.out.println("Esto ni me acuerdo porque lo puse");
         
     }
 

@@ -3,19 +3,7 @@ package albumes;
 public class Figurita implements Cloneable{
 String nombre;
 String tipoDeFigu;//Tradicional,Web o Extendido.
-public String getTipoDeFigu() {
-    return tipoDeFigu;
-}
-
-
-String pais;
- public String getPais() {
-    return pais;
-}
-
-
 int valorBase=10;//elijo un valor base de todas las figus.
-
 int rankingValorBase;//ranking de la figu
 int numeroQueIdentifica;//numero unico de la figurita
 public int getNumeroQueIdentifica() {
@@ -60,12 +48,22 @@ protected Object clone() //throws CloneNotSupportedException
   }
 
 
-  public boolean equals(Object o){//Implementamos el equals como se enseño en clase para no tener problemas de hashs en referencias.
+  public boolean equals(Object o){//Implemente el equals como se enseño en clase para no tener problemas de hashs en referencias.
     if(this==o) return true;
     if(o==null) return false;
     if(this.getClass()!=o.getClass())return false;
     Figurita other=(Figurita) o;  
-    return (this.getNumeroQueIdentifica()==other.getNumeroQueIdentifica());
+    return (this.getNumeroQueIdentifica()==other.getNumeroQueIdentifica()&&this.getTipoDeFigu().equals(other.getTipoDeFigu()));//mismo numero y mismo tipo de figu, quiere decir que son figuritas iguales.
+}
+
+public String getTipoDeFigu() {
+    return tipoDeFigu;
+}
+
+
+String pais;
+ public String getPais() {
+    return pais;
 }
 
 }
