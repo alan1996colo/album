@@ -1,9 +1,7 @@
 package albumes;
 
 
-import java.lang.Package;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 public class testing{
     
     public static void main(String[] args) {

@@ -4,16 +4,15 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
-import javax.management.RuntimeErrorException;
+
 
 import java.util.ArrayList;
-import java.util.List;
-import java.lang.Package;
+
 
 public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
 	Fabrica factory=new Fabrica();
 	public IAlbumDelMundial(){}
-    Hashtable<Integer ,Usuario >participantesConAlbumes=new Hashtable<>();
+    Hashtable<Integer ,Usuario<Album> >participantesConAlbumes=new Hashtable<>();
 
 	Figurita a= new Figurita ("leonel messi","Tradicional","Argentina",1, 0);
 	Figurita b= new Figurita ("asd ddsd","Tradicional","Argentina",1, 1);
@@ -31,7 +30,7 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
 	Map<String, Boolean> codigoWeb = new HashMap<>();
 	Map<Integer,Integer> DniToHash= new HashMap<>();//La idea es hacer un diccionario, con los dnis y hash correspondientes, despues dado un dni consigo el hash y puedo buscar en el otro map.
 	Map<Integer,Boolean> SorteoDado= new HashMap<>();//Se usa para saber si a X participante ya le dieron el sorteoInstantaneo.
-		
+	ArrayList<String> ganadores=new ArrayList<>();
 
 /**Crea una string al azar del largo n, usa StringBuilder
  * 
@@ -69,7 +68,7 @@ private String crearStringRandom(int n){
 	 */
 public int registrarParticipante(int dni, String nombre, String tipoAlbum){
 	
-		Usuario nuevoPart= new Usuario(dni, nombre);
+		Usuario<Album> nuevoPart= new Usuario<Album>(dni, nombre);
 		int codigoUnico= nuevoPart.toString().hashCode();
 		if(DniToHash.containsKey(dni)){//reviso el maps, si el hashcode ya esta en uso, el participante ya esta registrado.
 			throw new RuntimeException("El participante, ya se encuentra registrado");
@@ -170,7 +169,7 @@ for (Figurita nueva : sobre) {
 	 */
 	public void comprarFiguritasConCodigoPromocional(int dni){//falta implementar la excepcion
 
-		Usuario usr= participantesConAlbumes.get(DniToHash.get(Integer.valueOf(dni) ));
+		Usuario<Album> usr= participantesConAlbumes.get(DniToHash.get(Integer.valueOf(dni) ));
 		AlbumWeb val=(AlbumWeb) usr.getAlbumpropio();
 		System.out.println("el codig web es chan..."+ val.getCodigoWeb()+" <--");
 		//que estupido perdi 30 minutos en esto y era que lo registraba en false.
@@ -212,14 +211,24 @@ public void mostrarSinpegar(int dni){
 	 * 
 	 * Si el participante no está registrado, se debe lanzar una excepción.
 	 */
-	public List<String> pegarFiguritas(int dni){//Excepcion a implementar..
+	public ArrayList<String> pegarFiguritas(int dni){//Excepcion a implementar..
 		//probando si era necesario castear a Integer
 		Integer dniInteger=Integer.valueOf(dni);
-		return participantesConAlbumes.get(DniToHash.get(dniInteger)).solicitarPegarFigus();
+		ArrayList<String> ret=participantesConAlbumes.get(DniToHash.get(dniInteger)).solicitarPegarFigus();
+		//aca deberia implementar lo de agregar ganadores
+		if(participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio().isAlbumCompleto()&&!ganadores.contains(participantesConAlbumes.get(DniToHash.get(dniInteger)).toString())){
+			participantesConAlbumes.get(DniToHash.get(dniInteger)).setPremio(participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio().darpremioFinal());
+		this.ganadores.add(participantesConAlbumes.get(DniToHash.get(dniInteger)).toString());
+
+		}
+		return ret;
 
 
 
 
+	}
+	public void mostrarPegadas(int dni){
+		participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().mostrarPegadas();
 	}
 
 	/**
@@ -245,14 +254,15 @@ public void mostrarSinpegar(int dni){
 	public String aplicarSorteoInstantaneo(int dni){
 		if(!DniToHash.containsKey(dni)){throw new RuntimeException("El participante no se encuentra registrado");}
 		String premios[]={"una pelota","un paquete de cigarrillos","una camiseta firmada por el tucu","un saludo de el dibu"};
-		if(!SorteoDado.get(DniToHash.get(Integer.valueOf(dni)))){
+		if(SorteoDado.get(DniToHash.get(Integer.valueOf(dni)))!=null&&SorteoDado.get(DniToHash.get(Integer.valueOf(dni)))==false){//primera vez que entra, lo damos y ponemos algo.
 			int index=(int) (premios.length*Math.random());
-			SorteoDado.put(DniToHash.get(dni), true); //cambiamos el estado ha true, significa dado.
+			SorteoDado.put(DniToHash.get(dni), true);
 			return premios[index];
+
 		}
-		else{throw new RuntimeException("El premio ya ha sido sorteado");
-			 }
-	
+		else{if(SorteoDado.get(DniToHash.get(Integer.valueOf(dni)))!=null&&DniToHash.get(Integer.valueOf(dni))!=null&&SorteoDado.get(DniToHash.get(Integer.valueOf(dni))).equals(Boolean.valueOf(true))){throw new RuntimeException("El premio ya ha sido sorteado");//si no esta en null significa que ya fue sorteado
+			 }}
+	return "";
 	}
 
 	/**
@@ -357,7 +367,14 @@ else{ return participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().bu
 	 *     " - ($dni) $nombre: $premio"
 	 */
 	public String listadoDeGanadores(){
-
+	
+		if (this.ganadores.isEmpty()){
+			System.out.println("la lista de ganadores esta vacia");
+			return "";
+		}
+		else
+		{return this.ganadores.toString();
+		}
 		
 	}
 	
@@ -368,7 +385,28 @@ else{ return participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().bu
 	 * De cada participante se devuelve el siguiente String: 
 	 *     "($dni) $nombre: $tipoAlbum"
 	 */
-	 public List<String> participantesQueCompletaronElPais(String nombrePais){}
+	 public ArrayList<String> participantesQueCompletaronElPais(String nombrePais){
+		Set<Integer> setOfKeys = participantesConAlbumes.keySet();//aca voy a guardar las keys
+		ArrayList<String> completaron=new ArrayList<>();
+		for (Integer key : setOfKeys) {
+			if(participantesConAlbumes.get(key).getAlbumpropio().completePais(nombrePais)!=null &&(boolean)participantesConAlbumes.get(key).getAlbumpropio().completePais(nombrePais)){
+				completaron.add(participantesConAlbumes.get(key).toString());
+			}
+
+
+	 }
+	 return completaron;
 
    
+}
+public String toString(){
+	Set<Integer> setOfKeys = participantesConAlbumes.keySet();
+	StringBuilder ret=new StringBuilder();
+	ret.append("Album del mundial, participantes:");
+	for (Integer key : setOfKeys) {
+		ret.append(" "+participantesConAlbumes.get(key).toString());
+
+	
+}return ret.toString();
+}
 }

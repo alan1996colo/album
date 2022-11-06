@@ -19,7 +19,7 @@ public Figurita(String nombre,String tipoDeFigu, String pais,int rankingValorBas
 
 }
 public String toString(){
-return this.nombre + " "+this.tipoDeFigu+" "+this.pais+" "+this.numeroQueIdentifica+" ";
+return this.pais+"  "+this.numeroQueIdentifica+"  "+this.nombre + "  "+this.tipoDeFigu+"  ";
 }
 
 

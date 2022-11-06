@@ -34,10 +34,6 @@ private void generarPaisesClasificados(String paisesParticipantes[]) {
 
 
 public String darpremioFinal(){
-   if(!this.premioFinal){
-     return "Te ganaste una pelota, Felicidades en brevedad te va estar llegando a tu casa...";
-   }
-   else{ return "Ya recibiste el premio, que mas queres";}
-};
+    return "Se gano una pelota";}
  
 }

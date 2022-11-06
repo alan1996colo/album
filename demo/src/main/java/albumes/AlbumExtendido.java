@@ -14,6 +14,8 @@ public class AlbumExtendido extends AlbumTradicional{
   //  String tipoAlbum="Extendido";
     //Este constructor esta de mas, porque el padre tiene el mismo.
 
-    public void premioFinal(){};
+    public String darpremioFinal(){
+      return "Se gano una pelota y un viaje";
+    };
    
 }

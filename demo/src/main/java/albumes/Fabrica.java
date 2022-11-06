@@ -21,7 +21,7 @@ public class Fabrica {
 	//esto de nombre y apellidos es para generar figus que vayan intercalando nombres y apellidos
 	private String[] nombres=new String[]{"Emiliano","Gerónimo","Franco","Nahuel","Gonzalo","Cristian","Germán","Nicolás","Lisandro","Marcos","Rodrigo","Leandro","Lionel","Alexis","Guido","Alejandro","Enzo","Exequiel","Lautaro","Ángel"};
 	private String[] apellidos=new String[]{"Gómez","Fernández","Palacios","Messi","Martínez","Di María","Álvarez","González","Correa","Dybala","Foyth","Lo Celso","Almada","Rodríguez","Mac Allister","Paredes","De Paul","Tagliafico","Acuña","Rulli","Montiel"};
-	private Figurita[] coleccion=new Figurita[404];
+	private Figurita[] coleccion=new Figurita[384];
 	private FiguritaTop10[] coleccion20=new FiguritaTop10[20];
 	Fabrica() {
 		random = new Random(System.currentTimeMillis());
@@ -88,24 +88,30 @@ public class Fabrica {
 		return ranking.get(pais) + numero;
 	}
 	private Figurita[] generarColeccionCompleta(){
-		StringBuilder nombre=new StringBuilder();
-		Figurita[] coleccioncompleta=new Figurita[404];
+		
+		Figurita[] coleccioncompleta=new Figurita[384];
 		int contandoPaises=0;
 		for(int i=0;i<this.nombres.length;i++){
-			nombre.append(this.nombres[i]);
+			String nombre;
+			String balon="Oro";
 			for(int j=0;j<this.apellidos.length;j++){
 				
-				nombre.append(" "+this.apellidos[j]);
-				if(contandoPaises/12<32){Figurita nueva= new Figurita(nombre.toString(), null, paisesParticipantes[contandoPaises/12], ranking.get(paisesParticipantes[contandoPaises/12]), contandoPaises);
+				nombre=this.nombres[i]+" "+this.apellidos[j];
+				if(contandoPaises/12<32){Figurita nueva= new Figurita(nombre, null, paisesParticipantes[contandoPaises/12], ranking.get(paisesParticipantes[contandoPaises/12]), contandoPaises);
 					coleccioncompleta[contandoPaises]=nueva;
 						
 					contandoPaises=contandoPaises+1;}
 					else{
 
-						String paisss=generarListadoDeMundiales()[(contandoPaises-404)/2];
+						String paisss=generarListadoDeMundiales()[(contandoPaises-384)/2];
+						
+						if(balon.equals("Oro")){
+							balon="Plata";
+						}
+						else{balon="Oro";}
 						//aca creo las figuritas top10
-						FiguritaTop10 nuevo=new FiguritaTop10(nombre.toString(), "Extendido", balonYPaisPorMundialTop10.get(paisss)[(contandoPaises-404)%2], ranking.get(balonYPaisPorMundialTop10.get(paisss)[(contandoPaises-404)%2]), contandoPaises-404);
-
+						FiguritaTop10 nuevo=new FiguritaTop10(nombre.toString(), "Extendido", balonYPaisPorMundialTop10.get(paisss)[(contandoPaises-404)%2], (int) ranking.get(balonYPaisPorMundialTop10.get(paisss)[(contandoPaises-404)%2]), contandoPaises-404,paisss,balon);
+						this.coleccion20[contandoPaises-384]=nuevo;
 
 
 					}

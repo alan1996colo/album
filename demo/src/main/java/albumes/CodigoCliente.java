@@ -1,6 +1,6 @@
 package albumes;
 //se logro modificar
-import albumes.IAlbumDelMundial;
+
 import java.util.List;
 
 
@@ -56,6 +56,20 @@ public class CodigoCliente {
 		for (int i =0;i<500;i++) {
 			sistema.comprarFiguritas(666666);
 			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
+			sistema.comprarFiguritas(666666);
+			sistema.pegarFiguritas(666666);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}
@@ -82,6 +96,8 @@ public class CodigoCliente {
 		System.out.println();
 		System.out.println("=================================================");
 		System.out.println(sistema);
+
+		//sistema.mostrarPegadas(666666);
 	}
 
 }

@@ -22,7 +22,7 @@ public AlbumWeb(String codigoWeb,int codigoUnico,String nombreDueño, int dniDue
     this.tipoAlbum="Web";
 
 }
-public void premioFinal(){};
+public String darpremioFinal(){ return "Se gano una camiseta oficial de la seleccion";};
 public void verCodigoCompFigusTrad(){};
 
 }

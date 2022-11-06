@@ -4,8 +4,7 @@ package albumes;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+
 import java.util.ListIterator;
 public abstract class Album {
     //String tipoAlbum;
@@ -17,7 +16,7 @@ public abstract class Album {
     int codigoUnico;//Esto se usa para sortear el premio instantaneo
     int dniDueño;//esto quizas despues lo saquemos
     String nombreDueño;
-    Figurita coleccion[]=new Figurita[cantPaises*cantJugadores];
+    Figurita coleccion[]=new Figurita[383];
     ArrayList<Figurita> figuritasSinpegar=new ArrayList<>();
     //esto quizas lo quitamos por lo de la fabrica.
     Map<String ,Boolean> paisesCompletos=new HashMap<String,Boolean>() ; 
@@ -34,7 +33,7 @@ public abstract class Album {
     };
 
     public String getTipoAlbum() {
-        System.out.println("se ejecuto el metodo get delpadre");
+        //System.out.println("se ejecuto el metodo get delpadre");
       return this.tipoAlbum;
    }
     
@@ -83,13 +82,14 @@ private void verificar(){
      *  si todos están completos cambia a true el valor albumCompleto y finalmente devuelve la lista de las que se pudieron pegar
      * @return
      */
-    public List<String>  verificarYpegarFigus(){//bueno aca use Iterator asi que no se pueden quejar
+    public ArrayList<String>  verificarYpegarFigus(){//bueno aca use Iterator asi que no se pueden quejar
         ArrayList<String> ret =new ArrayList<String>();//esta es la lista a retornar.
         ListIterator<Figurita> algo=figuritasSinpegar.listIterator();// el iterador
         //int checkPoint=0;
         Figurita actual;// va almacenar el iterador actual.
 
-        if (this.AlbumCompleto==true){System.out.println("Album lleno, nada para agregar.");return null;}
+        if (this.AlbumCompleto==true){//System.out.println("Album lleno, nada para agregar.");
+        return null;}
         else{ 
             
             while (algo.hasNext()) {
@@ -117,7 +117,11 @@ private void verificar(){
         }
 
 
-
+public void mostrarPegadas(){
+    for(int i=0;i<coleccion.length;i++){
+        System.out.println("["+coleccion[i].toString()+"-"+i+"]");
+    }
+}
 
     
     public void mostrarSinpegar(){
@@ -193,6 +197,9 @@ private void verificar(){
             
         }
         return null;
+    }
+    public Boolean completePais(String pais){
+        return paisesCompletos.get(pais);
     }
 
 

@@ -1,7 +1,8 @@
 package albumes;
-import albumes.IAlbumDelMundial;
+//estos son los archivos...
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -198,7 +199,7 @@ public class AlbumDelMundialTest {
 	
 	@Test
 	public void t20_consultarParticipantesQueCompletaronArgentinaConJuegoRecienEmpezado_DevuelveListaVacia() {
-		List<String> completaronPais=sistema.participantesQueCompletaronElPais("Argentina");
+		ArrayList<String> completaronPais=sistema.participantesQueCompletaronElPais("Argentina");
 		assertEquals(0, completaronPais.size());
 	}
 }
