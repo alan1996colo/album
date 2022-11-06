@@ -22,7 +22,7 @@ PRIMERA PARTE**
 
 Alan Echabarri
 
-Santiago Aguirre
+~~Santiago Aguirre~~
 
 Para abordar el problema planteado por el enunciado, proponemos el siguiente diagrama de clases
 
