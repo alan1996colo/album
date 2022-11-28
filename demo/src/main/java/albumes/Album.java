@@ -16,7 +16,7 @@ public abstract class Album {
     int codigoUnico;//Esto se usa para sortear el premio instantaneo
     int dniDueño;//esto quizas despues lo saquemos
     String nombreDueño;
-    Figurita coleccion[]=new Figurita[383];
+    Figurita coleccion[]=new Figurita[cantPaises*cantJugadores];//384
     ArrayList<Figurita> figuritasSinpegar=new ArrayList<>();
     //esto quizas lo quitamos por lo de la fabrica.
     Map<String ,Boolean> paisesCompletos=new HashMap<String,Boolean>() ; 
@@ -95,7 +95,7 @@ private void verificar(){
             while (algo.hasNext()) {
               //  checkPoint=checkPoint+1;
                 actual=algo.next();//uso esto porque si llamo a algo.next() mas de una vez pasa al siguiente en el mismo ciclo
-            if(coleccion[actual.getNumeroQueIdentifica() ]==null&& actual.getTipoDeFigu().equals(this.getTipoAlbum())){//si la posicion es null, quiere decir que la figu no esta pegada.
+            if(actual.getNumeroQueIdentifica()<coleccion.length && coleccion[actual.getNumeroQueIdentifica() ]==null&& actual.getTipoDeFigu().equals(this.getTipoAlbum())){//si la posicion es null, quiere decir que la figu no esta pegada.
                 //o la figu esta pegada mal o la figu no esta pegada. ademas las figuritas deben ser del mismo tipo
                 coleccion[actual.getNumeroQueIdentifica()]=actual;//agrego al array, espero no me de problema de ejecucion.
                     ret.add(actual.toString());//Agrego la figu a la lista de retorno

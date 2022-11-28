@@ -11,7 +11,8 @@ public class Usuario <T extends Album> implements Comparable<Usuario<Album>>{//e
 int dni;
 
 String nombre;
-String premio;
+String premio="";
+T albumpropio;
 
 public void setPremio(String premio) {
     this.premio = premio;
@@ -22,7 +23,6 @@ public String getNombre() {
 public int getDni() {
     return dni;
 }
-T albumpropio;
 public T getAlbumpropio(){return albumpropio;}
 public void setAlbumPropio(T alb){this.albumpropio=alb;}
 

@@ -8,7 +8,7 @@ import java.util.List;
 public class CodigoCliente {
 
 	public static void main(String[] args) {
-
+		
 		IAlbumDelMundial sistema = new IAlbumDelMundial();
 		
 		sistema.registrarParticipante(222222, "Christian", "Tradicional");
@@ -52,6 +52,10 @@ public class CodigoCliente {
 			sistema.pegarFiguritas(222222);
 			sistema.comprarFiguritas(555555);
 			sistema.pegarFiguritas(555555);
+			//el 3333 lo puse para comprobar que los metodos del album Extendido funcionan.
+			sistema.comprarFiguritasTop10(333333);
+			sistema.comprarFiguritas(333333);
+			sistema.pegarFiguritas(333333);
 		}
 		for (int i =0;i<500;i++) {
 			sistema.comprarFiguritas(666666);
@@ -87,6 +91,7 @@ public class CodigoCliente {
 		System.out.println("Llenaron album:");
 		System.out.println(sistema.listadoDeGanadores());
 		System.out.println();
+		System.out.println("=================================================");
 		
 		System.out.println("Participantes que Llenaron el Pais Argentina:");
 		for (String item: sistema.participantesQueCompletaronElPais("Argentina"))
@@ -96,8 +101,8 @@ public class CodigoCliente {
 		System.out.println();
 		System.out.println("=================================================");
 		System.out.println(sistema);
-
-		//sistema.mostrarPegadas(666666);
+		//sistema.mostrarPegadas(333333);
+		
 	}
 
 }

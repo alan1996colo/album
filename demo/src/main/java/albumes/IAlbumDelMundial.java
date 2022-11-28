@@ -14,18 +14,7 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial{
 	public IAlbumDelMundial(){}
     Hashtable<Integer ,Usuario<Album> >participantesConAlbumes=new Hashtable<>();
 
-	Figurita a= new Figurita ("leonel messi","Tradicional","Argentina",1, 0);
-	Figurita b= new Figurita ("asd ddsd","Tradicional","Argentina",1, 1);
-	Figurita c= new Figurita ("asww gbdf","Tradicional","Argentina",1, 2);
-
-	Figurita d= new Figurita ("ewe2 kjghj5","Tradicional","Argentina",1, 3);
-	Figurita e = new Figurita ("1wd nsss","Tradicional","Argentina",1, 4);
-
-
-	Figurita f= new Figurita ("rogelio","Tradicional","Argentina",1, 5);//esto es momentaneo, mas tarde voy hacer que se vayan generando automaticamente.
-
-    Figurita coleccionCompleta[]={
-		a,b,c,d,e,f};
+    Figurita coleccionCompleta[];
     Figurita coleccion20[];
 	Map<String, Boolean> codigoWeb = new HashMap<>();
 	Map<Integer,Integer> DniToHash= new HashMap<>();//La idea es hacer un diccionario, con los dnis y hash correspondientes, despues dado un dni consigo el hash y puedo buscar en el otro map.
@@ -146,17 +135,13 @@ for (Figurita nueva : sobre) {
 	 */
 	public void comprarFiguritasTop10(int dni){//falta implementar lo de la excepcion.
 
-		for (int i = 0; i < 4; i++) {
-   
-			// crea un numero al azar entre 
-			// 0 y coleccion completa length
-			int index
-			 = (int)(coleccion20.length
-			   * Math.random());
-			Figurita nueva=(Figurita)coleccion20[index].clone();// Hay que implementar clone en la clase Figurita
-			participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
-			
-	}
+		ArrayList<FiguritaTop10> sobre=new ArrayList<>();
+		sobre=factory.generarSobreTop10(4);
+	for (FiguritaTop10 nueva : sobre) {
+	nueva.setTipo(saberTipoDeAlbum(dni));
+	participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);
+}
+	
 	}
 
 	/**
@@ -171,24 +156,19 @@ for (Figurita nueva : sobre) {
 
 		Usuario<Album> usr= participantesConAlbumes.get(DniToHash.get(Integer.valueOf(dni) ));
 		AlbumWeb val=(AlbumWeb) usr.getAlbumpropio();
-		System.out.println("el codig web es chan..."+ val.getCodigoWeb()+" <--");
+		//System.out.println("el codig web es chan..."+ val.getCodigoWeb()+" <--");
 		//que estupido perdi 30 minutos en esto y era que lo registraba en false.
 		if(!Boolean.valueOf(codigoWeb.get(val.getCodigoWeb()))){//Si esta disponible lo hago no disponible y entrego las figuritas.
 			codigoWeb.put(val.getCodigoWeb(), true);
 
 
-			for (int i = 0; i < 4; i++) {
-   
-				// crea un numero al azar entre 
-				// 0 y coleccion completa length
-				int index
-				 = (int)(coleccionCompleta.length
-				   * Math.random());
-				Figurita nueva=(Figurita)coleccionCompleta[index].clone();// Hay que implementar clone en la clase Figurita
-				nueva.setTipo("Tradicional"); //Hay que implementar setTipo en la clase Figurita
-				   participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);//Agregamos la figurita a la lista sin pegar, del album del participante.
-				
-		}
+			ArrayList<Figurita> sobre=new ArrayList<>();
+			sobre=factory.generarSobre(4);
+			for (Figurita nueva : sobre) {
+				nueva.setTipo("Tradicional");
+				participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);
+										 }		
+		
 
 		}
 		else{ throw new RuntimeException("Lo sentimos, el codigo web ya ha sido utilizado.");}
@@ -253,7 +233,8 @@ public void mostrarSinpegar(int dni){
 	 */
 	public String aplicarSorteoInstantaneo(int dni){
 		if(!DniToHash.containsKey(dni)){throw new RuntimeException("El participante no se encuentra registrado");}
-		String premios[]={"una pelota","un paquete de cigarrillos","una camiseta firmada por el tucu","un saludo de el dibu"};
+		if(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum().equals("Tradicional")==false){ return "Nada porque su Album es: " +participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum();}//cuando el album no sea tradicional, mostramos esto.
+				String premios[]={"una pelota","un paquete de cigarrillos","una camiseta firmada por el tucu","un saludo de el dibu"};
 		if(SorteoDado.get(DniToHash.get(Integer.valueOf(dni)))!=null&&SorteoDado.get(DniToHash.get(Integer.valueOf(dni)))==false){//primera vez que entra, lo damos y ponemos algo.
 			int index=(int) (premios.length*Math.random());
 			SorteoDado.put(DniToHash.get(dni), true);
@@ -402,11 +383,8 @@ else{ return participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().bu
 public String toString(){
 	Set<Integer> setOfKeys = participantesConAlbumes.keySet();
 	StringBuilder ret=new StringBuilder();
-	ret.append("Album del mundial, participantes:");
-	for (Integer key : setOfKeys) {
-		ret.append(" "+participantesConAlbumes.get(key).toString());
+	ret.append("~~~Album del mundial~~~ \n Cantidad de participantes que llenaron el Album: " + ganadores.size()+ "\n Cantidad que siguen participando(No llenaron): " +(DniToHash.size()-ganadores.size()));
 
-	
-}return ret.toString();
+	return ret.toString();
 }
 }

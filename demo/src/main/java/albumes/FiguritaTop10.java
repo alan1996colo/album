@@ -23,4 +23,19 @@ public class FiguritaTop10 extends Figurita{
 
     }
 
+
+    @Override
+protected Object clone() //throws CloneNotSupportedException 
+{
+  
+    FiguritaTop10 nueva= new FiguritaTop10(this.nombre, this.tipoDeFigu, this.pais, this.rankingValorBase, this.numeroQueIdentifica, this.sedeMundialYaño, this.balonde) ;
+    return nueva;
+  }
+
+
+
+public String toString(){
+    return this.pais+"  "+this.numeroQueIdentifica+"  "+this.nombre + "  "+this.tipoDeFigu+"  " +this.sedeMundialYaño+" "+ this.año+ " "+this.balonde;
+    }
+
 }
