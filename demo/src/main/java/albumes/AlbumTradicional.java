@@ -1,19 +1,12 @@
 //si se modifica
 package albumes;
 
-import java.util.Map;
-
 public class AlbumTradicional extends Album{
- //String tipoAlbum="Tradicional";
- /*public String getTipoAlbum() {
-   System.out.println("se ejecuto el metodo del tradicional");
-   return this.tipoAlbum;
-}
 /* */
-   public AlbumTradicional(int codigoUnico,String nombreDueño,int dniDueño,String paisesParticipantes[]){
+   public AlbumTradicional(int codigoUnico,String nombreDueno,int dniDueno,String paisesParticipantes[]){
         this.codigoUnico=codigoUnico;
-        this.nombreDueño=nombreDueño;
-        this.dniDueño=dniDueño;
+        this.nombreDueno=nombreDueno;
+        this.dniDueno=dniDueno;
         this.tipoAlbum="Tradicional";
         generarPaisesClasificados(paisesParticipantes);
        
@@ -29,9 +22,6 @@ private void generarPaisesClasificados(String paisesParticipantes[]) {
    }
       
    }
-
-
-
 
 public String darpremioFinal(){
     return "Se gano una pelota";}

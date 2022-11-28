@@ -7,30 +7,20 @@ import java.util.HashMap;
 
 import java.util.ListIterator;
 public abstract class Album {
-    //String tipoAlbum;
-    //String codigoWeb;
-    
+
     String tipoAlbum;
-    int cantPaises=32;//esto quizas lo saquemos por lo de la fabrica
+    int cantPaises=32;
     int cantJugadores=12;
     int codigoUnico;//Esto se usa para sortear el premio instantaneo
-    int dniDueño;//esto quizas despues lo saquemos
-    String nombreDueño;
+    int dniDueno;
+    String nombreDueno;
     Figurita coleccion[]=new Figurita[cantPaises*cantJugadores];//384
     ArrayList<Figurita> figuritasSinpegar=new ArrayList<>();
-    //esto quizas lo quitamos por lo de la fabrica.
     Map<String ,Boolean> paisesCompletos=new HashMap<String,Boolean>() ; 
-    
-    //descatado:---/Uso un solo map con integers
-    // el map me devuelve la posicion del pais y si la posicion es -1 significa que el pais esta completo.
-
-    
     boolean premioFinal=false;
     boolean AlbumCompleto=false;
 
-    public Album(){
-        
-    };
+    public Album(){};//El constructor vacio
 
     public String getTipoAlbum() {
         //System.out.println("se ejecuto el metodo get delpadre");
@@ -61,12 +51,13 @@ private void verificar(){
        
         if(contador==12){
             paisesCompletos.put(this.coleccion[i].getPais(), true);
-            contador=0;//Esto quizas sea redundante porque si es igual a 12 quiere decir que pase de pagina.
+            contador=0;
         }
     }
     //cuando llego a este punto el booleano ya deberia haber cambiado a false, o directamente estar en true como desde el principio.
     this.AlbumCompleto=albumcompleto;
 }
+
 
 
     /**
@@ -116,7 +107,7 @@ private void verificar(){
             //falta implementar la parte de verificar si el album esta completo y cambiar el estado booleano de AlbumCOmpleto
         }
 
-
+/**Muestra las figuritas pegadas en el album. */
 public void mostrarPegadas(){
     for(int i=0;i<coleccion.length;i++){
         System.out.println("["+coleccion[i].toString()+"-"+i+"]");
@@ -124,11 +115,9 @@ public void mostrarPegadas(){
 }
 
     
-    public void mostrarSinpegar(){
-        System.out.println(figuritasSinpegar.toString());
-    };
+public void mostrarSinpegar(){System.out.println(figuritasSinpegar.toString());};
 
-    private boolean estaRepetidaEnsinPegar(Figurita figu){//revisa si esta repetida entre las sin pegar
+private boolean estaRepetidaEnsinPegar(Figurita figu){//revisa si esta repetida entre las sin pegar
         int cont=0;
         for (Figurita iter : figuritasSinpegar) {
             if(figu.equals(iter)){
@@ -142,7 +131,7 @@ public void mostrarPegadas(){
     /**
      * Busca en las figus sin pegar si hay alguna repetida y devuelve el codigo de la primera que encuentre.
      */
-    public int buscarRepetidas(){
+public int buscarRepetidas(){
         for (Figurita iter : figuritasSinpegar) {
             if(this.contains(iter)||estaRepetidaEnsinPegar(iter)){
                 return iter.getNumeroQueIdentifica();
@@ -157,14 +146,14 @@ public void mostrarPegadas(){
      * @param figu
      * @return
      */
-    public boolean contains(Figurita figu){
+public boolean contains(Figurita figu){
         if(coleccion[figu.getNumeroQueIdentifica()]!=null){//si la posicion no es null, esta ocupada por una carta, que deberia ser la correcta.
             return true;
         }
 
         return false;
     }
-    public boolean containsFiguSinPegar(int numFigu){
+public boolean containsFiguSinPegar(int numFigu){
         for (Figurita figurita : figuritasSinpegar) {
             if(figurita.getNumeroQueIdentifica()==numFigu){
                 return true;
@@ -175,7 +164,8 @@ public void mostrarPegadas(){
         }
         return false;
     }
-    public ArrayList<Figurita> figusRepetidas(){
+
+public ArrayList<Figurita> figusRepetidas(){
         ArrayList<Figurita> figuritasRep=new ArrayList<>();
         for (Figurita iter : figuritasSinpegar) {
             if(estaRepetidaEnsinPegar(iter)||this.contains(iter)){
@@ -184,29 +174,23 @@ public void mostrarPegadas(){
             }
             
         }
-        return figuritasRep;
-
-
-        
+        return figuritasRep;      
     }
-    public Figurita getFigurita(int numFig){
+
+
+public Figurita getFigurita(int numFig){
         for (Figurita iterable_element : figuritasSinpegar) {
             if(iterable_element.getNumeroQueIdentifica()==numFig){
                 return iterable_element;
-            }
-            
+            }            
         }
         return null;
     }
-    public Boolean completePais(String pais){
+
+
+public Boolean completePais(String pais){
         return paisesCompletos.get(pais);
     }
 
-
-
-
-     public static void main(String[] args) {System.out.println("Esto ni me acuerdo porque lo puse");
-        
-    }
 
 }

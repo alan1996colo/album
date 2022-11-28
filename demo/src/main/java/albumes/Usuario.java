@@ -11,7 +11,7 @@ public class Usuario <T extends Album> implements Comparable<Usuario<Album>>{//e
 int dni;
 
 String nombre;
-String premio="";
+String premio="";//Soluciona lo de mostrar "null"
 T albumpropio;
 
 public void setPremio(String premio) {
@@ -47,7 +47,7 @@ ArrayList<String>  solicitarPegarFigus(){
 boolean completeElAlbum(){
     return this.albumpropio.isAlbumCompleto();
 }
-public int compareTo(Usuario<Album> otro){//no creo que lo llegue a usar pero, no esta de mas(?)
+public int compareTo(Usuario<Album> otro){
     return (otro.getDni()-this.getDni());
 }
 public boolean equals(Object o){//Implementamos el equals como se enseño en clase para no tener problemas de hashs en referencias.

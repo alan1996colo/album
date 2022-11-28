@@ -14,11 +14,11 @@ public String getCodigoWeb() {
     System.out.println("se ejecuto el metodo del Web");
     return this.tipoAlbum;
  }*/
-public AlbumWeb(String codigoWeb,int codigoUnico,String nombreDueño, int dniDueño){
+public AlbumWeb(String codigoWeb,int codigoUnico,String nombreDueno, int dniDueno){
     this.codigoWeb=codigoWeb;
     this.codigoUnico=codigoUnico;
-    this.nombreDueño=nombreDueño;
-    this.dniDueño=dniDueño;
+    this.nombreDueno=nombreDueno;
+    this.dniDueno=dniDueno;
     this.tipoAlbum="Web";
 
 }

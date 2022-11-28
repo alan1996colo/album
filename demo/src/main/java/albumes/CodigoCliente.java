@@ -27,10 +27,11 @@ public class CodigoCliente {
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 
 		// participar en un sortepo por un premio instantaneo.
+		//NO, El participante 333333 tiene un album Extendido, por eso no puede recibir sorteo instantaneo
 		System.out.println(
 				sistema.darNombre(333333) + 
 				" recibio por sorteo instantaneo: " + 
-				sistema.aplicarSorteoInstantaneo(333333)
+				sistema.aplicarSorteoInstantaneo(222222)// Este lo modifique porque se pide que solo funcione con albumes tradicionales.
 			);
 		System.out.println();
 		

@@ -3,33 +3,27 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 
-
 public class AlbumExtendido extends AlbumTradicional{
+  
   private int cantExtend=20;
-
   FiguritaTop10 coleccion20[]=new FiguritaTop10[cantExtend];
 
 
-    public AlbumExtendido(int codigoUnico, String nombreDueño, int dniDueño,String paisesParticipantes[]) {
-        super(codigoUnico, nombreDueño, dniDueño,paisesParticipantes);
+
+public AlbumExtendido(int codigoUnico, String nombreDueno, int dniDueno,String paisesParticipantes[]) {
+        super(codigoUnico, nombreDueno, dniDueno,paisesParticipantes);
         //TODO Auto-generated constructor stub
         this.tipoAlbum="Extendido";
 
     }
 
-   
-  //  String tipoAlbum="Extendido";
-    //Este constructor esta de mas, porque el padre tiene el mismo.
-
-    public String darpremioFinal(){
-      return "Se gano una pelota y un viaje";
-    };
+public String darpremioFinal(){return "Se gano una pelota y un viaje";};
 
 
-    private void verificar(){
+private void verificar(){
       boolean albumcompleto=true;//esto va decir si se completo el album
       if(this.coleccion.length<1){albumcompleto=false;}//si por alguna razon no quiere entrar en el array, me aseguro que diga que esta incompleto
-      if(this.coleccion20.length<1){albumcompleto=false;}//si por alguna razon no quiere entrar en el array, me aseguro que diga que esta incompleto
+      if(this.coleccion20.length<1){albumcompleto=false;}//paso extendido
       
       int contador=0;
       for(int i=0;i<this.coleccion.length;i++){
@@ -72,14 +66,13 @@ public class AlbumExtendido extends AlbumTradicional{
      *  si todos están completos cambia a true el valor albumCompleto y finalmente devuelve la lista de las que se pudieron pegar
      * @return
      */
-    public ArrayList<String>  verificarYpegarFigus(){//bueno aca use Iterator asi que no se pueden quejar
+public ArrayList<String>  verificarYpegarFigus(){//bueno aca use Iterator asi que no se pueden quejar
       ArrayList<String> ret =new ArrayList<String>();//esta es la lista a retornar.
       ListIterator<Figurita> algo=figuritasSinpegar.listIterator();// el iterador
       //int checkPoint=0;
       Figurita actual;// va almacenar el iterador actual.
 
-      if (this.AlbumCompleto==true){//System.out.println("Album lleno, nada para agregar.");
-      return null;}
+      if (this.AlbumCompleto==true){return null;}
       else{ 
           
           while (algo.hasNext()) {
@@ -113,16 +106,12 @@ public class AlbumExtendido extends AlbumTradicional{
           
           
       }
-      //System.out.println("Cant veces entro en while = "+checkPoint);
       verificar();//obviamente despues de pegar las figus, verificamos si completamos el album y cambiamos el estado
       return ret;
+  }
 
-          //falta implementar la parte de verificar si el album esta completo y cambiar el estado booleano de AlbumCOmpleto
-      }
-
-
-
-      public void mostrarPegadas(){
+  /*Este metodo no se pide, pero sirve para llevar el control de lo que va haciendo el programa */
+public void mostrarPegadas(){
         for(int i=0;i<coleccion.length;i++){
           if(coleccion[i]!=null){
             System.out.println("["+coleccion[i].toString()+"-"+i+"] ");}

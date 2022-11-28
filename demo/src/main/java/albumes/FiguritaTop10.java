@@ -1,15 +1,15 @@
 package albumes;
 
 public class FiguritaTop10 extends Figurita{
-    String sedeMundialYaño;
-    int año;
+    String sedeMundialYanio;
+    int anio;
     String balonde;
 
 
 
-    public FiguritaTop10(String nombre,String tipoDeFigu, String pais,int rankingValorBase,  int numeroQueIdentifica,String sedeMundialYaño, String balonde){
+    public FiguritaTop10(String nombre,String tipoDeFigu, String pais,int rankingValorBase,  int numeroQueIdentifica,String sedeMundialYanio, String balonde){
         super(nombre, tipoDeFigu, pais, rankingValorBase, numeroQueIdentifica);
-        this.sedeMundialYaño=sedeMundialYaño;
+        this.sedeMundialYanio=sedeMundialYanio;
         this.balonde=balonde;     
     }
 
@@ -28,14 +28,14 @@ public class FiguritaTop10 extends Figurita{
 protected Object clone() //throws CloneNotSupportedException 
 {
   
-    FiguritaTop10 nueva= new FiguritaTop10(this.nombre, this.tipoDeFigu, this.pais, this.rankingValorBase, this.numeroQueIdentifica, this.sedeMundialYaño, this.balonde) ;
+    FiguritaTop10 nueva= new FiguritaTop10(this.nombre, this.tipoDeFigu, this.pais, this.rankingValorBase, this.numeroQueIdentifica, this.sedeMundialYanio, this.balonde) ;
     return nueva;
   }
 
 
 
 public String toString(){
-    return this.pais+"  "+this.numeroQueIdentifica+"  "+this.nombre + "  "+this.tipoDeFigu+"  " +this.sedeMundialYaño+" "+ this.año+ " "+this.balonde;
+    return this.pais+"  "+this.numeroQueIdentifica+"  "+this.nombre + "  "+this.tipoDeFigu+"  " +this.sedeMundialYanio+" "+ this.anio+ " "+this.balonde;
     }
 
 }

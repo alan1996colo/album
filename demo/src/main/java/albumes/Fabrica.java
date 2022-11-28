@@ -1,19 +1,13 @@
 package albumes;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 
 
 public class Fabrica {
 
-
-	private Random random;
 	private int cantPaises=32;
-
-	private String[] premiosInstantaneos;
 	private String[] paisesParticipantes;//esto va setear los paises participantes en la clase del
 	private int lugaresPorPais;
 	private String[] listadoDeMundialesTop10;
@@ -25,13 +19,12 @@ public class Fabrica {
 	private Figurita[] coleccion=new Figurita[cantPaises*lugaresPorPais];
 	private FiguritaTop10[] coleccion20=new FiguritaTop10[20];
 	Fabrica() {
-		random = new Random(System.currentTimeMillis());
+		
 		lugaresPorPais = 12;
 		paisesParticipantes = generarPaisesClasificados();
 		listadoDeMundialesTop10 = generarListadoDeMundiales();
 		balonYPaisPorMundialTop10 = generarPaisesPorMundial();
 		ranking = generarRanking();
-		premiosInstantaneos = generarPremiosParaSorteoInstantaneo();
 		coleccion= generarColeccionCompleta();
 		coleccion20=generarColeccion20();
 	}
@@ -100,11 +93,6 @@ public class Fabrica {
 	
 	// Dado el pais y numero de jugador de una figurita calcula
 	// cual es su valor base simbobilo.
-	private int calcularValorBase(String pais, int numero) {
-		return ranking.get(pais) + numero;
-	}
-
-
 
 
 	private FiguritaTop10[] generarColeccion20(){
@@ -130,7 +118,7 @@ public class Fabrica {
 		int contandoPaises=0;
 		for(int i=0;i<this.nombres.length;i++){
 			String nombre;
-			String balon="Oro";
+			
 			for(int j=0;j<this.apellidos.length;j++){
 				
 				nombre=this.nombres[i]+" "+this.apellidos[j];
@@ -151,11 +139,6 @@ public class Fabrica {
 
 	}
 
-	private String[] generarPremiosParaSorteoInstantaneo() {
-		return new String[]{
-				"Una pelota","1 Sobre Gratis", "Una camiseta"
-			};
-	}
 
 	private String[] generarPaisesClasificados() {
 		return new String[]{ 

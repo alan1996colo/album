@@ -6,9 +6,8 @@ String tipoDeFigu;//Tradicional,Web o Extendido.
 int valorBase=10;//elijo un valor base de todas las figus.
 int rankingValorBase;//ranking de la figu
 int numeroQueIdentifica;//numero unico de la figurita
-public int getNumeroQueIdentifica() {
-    return numeroQueIdentifica;
-}
+
+
 public Figurita(String nombre,String tipoDeFigu, String pais,int rankingValorBase,  int numeroQueIdentifica){
     this.nombre=nombre;
     this.tipoDeFigu=tipoDeFigu;
@@ -18,9 +17,21 @@ public Figurita(String nombre,String tipoDeFigu, String pais,int rankingValorBas
 
 
 }
-public String toString(){
-return this.pais+"  "+this.numeroQueIdentifica+"  "+this.nombre + "  "+this.tipoDeFigu+"  ";
+
+public int getNumeroQueIdentifica() {
+    return numeroQueIdentifica;
 }
+public String getTipoDeFigu() {
+    return tipoDeFigu;
+}
+
+
+String pais;
+ public String getPais() {
+    return pais;
+}
+
+public String toString(){return this.pais+"  "+this.numeroQueIdentifica+"  "+this.nombre + "  "+this.tipoDeFigu+"  ";}
 
 
 /** Calcula el valor final de la figurita dividiendo su valor base por el ranking
@@ -48,7 +59,7 @@ protected Object clone() //throws CloneNotSupportedException
   }
 
 
-  public boolean equals(Object o){//Implemente el equals como se enseño en clase para no tener problemas de hashs en referencias.
+public boolean equals(Object o){//Implemente el equals como se enseño en clase para no tener problemas de hashs en referencias.
     if(this==o) return true;
     if(o==null) return false;
     if(this.getClass()!=o.getClass())return false;
@@ -56,14 +67,6 @@ protected Object clone() //throws CloneNotSupportedException
     return (this.getNumeroQueIdentifica()==other.getNumeroQueIdentifica()&&this.getTipoDeFigu().equals(other.getTipoDeFigu()));//mismo numero y mismo tipo de figu, quiere decir que son figuritas iguales.
 }
 
-public String getTipoDeFigu() {
-    return tipoDeFigu;
-}
 
-
-String pais;
- public String getPais() {
-    return pais;
-}
 
 }
