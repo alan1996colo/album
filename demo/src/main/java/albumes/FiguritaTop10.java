@@ -2,7 +2,6 @@ package albumes;
 
 public class FiguritaTop10 extends Figurita {
     String sedeMundialYanio;
-    int anio;
     String balonde;
 
     public FiguritaTop10(String nombre, String tipoDeFigu, String pais, int rankingValorBase, int numeroQueIdentifica,
@@ -33,7 +32,7 @@ public class FiguritaTop10 extends Figurita {
 
     public String toString() {
         return this.pais + "  " + this.numeroQueIdentifica + "  " + this.nombre + "  " + this.tipoDeFigu + "  "
-                + this.sedeMundialYanio + " " + this.anio + " " + this.balonde;
+                + this.sedeMundialYanio + " " + this.balonde;
     }
 
 }

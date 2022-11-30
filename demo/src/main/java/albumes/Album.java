@@ -15,7 +15,6 @@ public abstract class Album {
     Figurita coleccion[] = new Figurita[cantPaises * cantJugadores];// 384
     ArrayList<Figurita> figuritasSinpegar = new ArrayList<>();
     Map<String, Boolean> paisesCompletos = new HashMap<String, Boolean>();
-    boolean premioFinal = false;
     boolean AlbumCompleto = false;
 
     public Album() {
