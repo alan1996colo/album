@@ -6,6 +6,8 @@ public class Figurita implements Cloneable {
     int valorBase = 10;// elijo un valor base de todas las figus.
     int rankingValorBase;// ranking de la figu
     int numeroQueIdentifica;// numero unico de la figurita
+    String pais;
+
 
     public Figurita(String nombre, String tipoDeFigu, String pais, int rankingValorBase, int numeroQueIdentifica) {
         this.nombre = nombre;
@@ -24,7 +26,6 @@ public class Figurita implements Cloneable {
         return tipoDeFigu;
     }
 
-    String pais;
 
     public String getPais() {
         return pais;

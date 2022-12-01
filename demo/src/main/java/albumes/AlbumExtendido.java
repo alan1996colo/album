@@ -11,7 +11,7 @@ public class AlbumExtendido extends AlbumTradicional {
   public AlbumExtendido(int codigoUnico, String nombreDueno, int dniDueno, String paisesParticipantes[]) {
     super(codigoUnico, nombreDueno, dniDueno, paisesParticipantes);
     // TODO Auto-generated constructor stub
-    this.tipoAlbum = "Extendido";
+   // this.tipoAlbum = "Extendido";
 
   }
 
@@ -88,7 +88,10 @@ public class AlbumExtendido extends AlbumTradicional {
         actual = algo.next();// uso esto porque si llamo a algo.next() mas de una vez pasa al siguiente en el
                              // mismo ciclo
         if (actual.getNumeroQueIdentifica() < coleccion.length && coleccion[actual.getNumeroQueIdentifica()] == null
-            && actual.getTipoDeFigu().equals(this.getTipoAlbum())) {// si la posicion es null, quiere decir que la figu
+            && actual.getTipoDeFigu().equals("Extendido")
+            
+            
+            ) {// si la posicion es null, quiere decir que la figu
                                                                     // no esta pegada.
           // o la figu esta pegada mal o la figu no esta pegada. ademas las figuritas
           // deben ser del mismo tipo
@@ -108,7 +111,7 @@ public class AlbumExtendido extends AlbumTradicional {
         // caso 2, es de la parte extendida
         else if (!(actual.getNumeroQueIdentifica() < coleccion.length)
             && coleccion20[actual.getNumeroQueIdentifica() - 384] == null
-            && actual.getTipoDeFigu().equals(this.getTipoAlbum())) {
+            && actual.getTipoDeFigu().equals("Extendido")) {
 
           coleccion20[actual.getNumeroQueIdentifica() - 384] = (FiguritaTop10) actual;// agrego al array, espero no me
                                                                                       // de problema de ejecucion.
@@ -141,5 +144,22 @@ public class AlbumExtendido extends AlbumTradicional {
       }
     }
   }
+
+  public float porcentajeCompleto(){
+    if(this.AlbumCompleto==true){return 100;}
+    float count=0;
+    for (int i =0;i<coleccion.length;i++) {
+        if(coleccion[i]!=null){
+            count=count+1;
+        }
+    }
+    for(int i=0;i<coleccion20.length;i++){
+      if(coleccion20[i]!=null){
+        count=count+1;
+      }
+    }
+    
+    return (count/(((float)coleccion.length)+(float)coleccion20.length))*100;
+}
 
 }

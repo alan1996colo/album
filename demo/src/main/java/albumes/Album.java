@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 public abstract class Album {
 
-    String tipoAlbum;
+   // String tipoAlbum;
     int cantPaises = 32;
     int cantJugadores = 12;
     int codigoUnico;// Esto se usa para sortear el premio instantaneo
@@ -20,10 +20,10 @@ public abstract class Album {
     public Album() {
     };// El constructor vacio
 
-    public String getTipoAlbum() {
+  /*  public String getTipoAlbum() {
         // System.out.println("se ejecuto el metodo get delpadre");
         return this.tipoAlbum;
-    }
+    }*/
 
     public boolean isAlbumCompleto() {
         return AlbumCompleto;
@@ -110,7 +110,14 @@ public abstract class Album {
                                      // mismo ciclo
                 if (actual.getNumeroQueIdentifica() < coleccion.length
                         && coleccion[actual.getNumeroQueIdentifica()] == null
-                        && actual.getTipoDeFigu().equals(this.getTipoAlbum())) {// si la posicion es null, quiere decir
+                        &&( 
+                            
+                       ( actual.getTipoDeFigu().equals("Tradicional") &&this.getClass().getSimpleName().equals("AlbumTradicional"))||( actual.getTipoDeFigu().equals("Web") &&this.getClass().getSimpleName().equals("AlbumWeb"))
+                        
+                        
+                        )
+                      
+                        ) {// si la posicion es null, quiere decir
                                                                                 // que la figu no esta pegada.
                     // o la figu esta pegada mal o la figu no esta pegada. ademas las figuritas
                     // deben ser del mismo tipo
@@ -120,7 +127,7 @@ public abstract class Album {
                     algo.remove();// y lo quito de la lista, espero no de problemas y tenga que usar iterator
                                   // xdxdxd
 
-                } else if (!coleccion[actual.getNumeroQueIdentifica()].equals(actual)) {// si esta pegada pero es
+                } else if (coleccion[actual.getNumeroQueIdentifica()]!=null&&!coleccion[actual.getNumeroQueIdentifica()].equals(actual)) {// si esta pegada pero es
                                                                                         // distinta.
                     System.out
                             .println("ups, lo sentimos algo salio mal y pegaron una figurita en el lugar equivocado.");
@@ -229,4 +236,15 @@ public abstract class Album {
         return paisesCompletos.get(pais);
     }
 
+    public float porcentajeCompleto(){
+        if(this.AlbumCompleto==true){return 100;}
+        float count=0;
+        for (int i =0;i<coleccion.length;i++) {
+            if(coleccion[i]!=null){
+                count=count+1;
+            }
+        }
+        
+        return (count/(float)coleccion.length)*100;
+    }
 }

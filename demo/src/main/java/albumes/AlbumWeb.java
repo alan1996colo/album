@@ -12,7 +12,7 @@ public class AlbumWeb extends Album {
         this.codigoUnico = codigoUnico;
         this.nombreDueno = nombreDueno;
         this.dniDueno = dniDueno;
-        this.tipoAlbum = "Web";
+      //  this.tipoAlbum = "Web";
 
     }
 

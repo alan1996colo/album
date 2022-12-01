@@ -7,7 +7,7 @@ public class AlbumTradicional extends Album {
       this.codigoUnico = codigoUnico;
       this.nombreDueno = nombreDueno;
       this.dniDueno = dniDueno;
-      this.tipoAlbum = "Tradicional";
+     // this.tipoAlbum = "Tradicional";
       generarPaisesClasificados(paisesParticipantes);
 
    }

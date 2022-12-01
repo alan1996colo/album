@@ -92,13 +92,8 @@ public class Usuario<T extends Album> implements Comparable<Usuario<Album>> {// 
         return false;
     }
 
-    void verMisFigusRepet() {
-    }
-
-    void mostrarSinpegar() {
-    }
-
-    void quienCompletoElPais(String pais) {
-    }
-
+    public float porcentajeCompleto(){ 
+        return this.albumpropio.porcentajeCompleto();
+		
+	}
 }

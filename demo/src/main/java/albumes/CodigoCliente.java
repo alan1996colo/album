@@ -24,6 +24,9 @@ public class CodigoCliente {
 		sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(333333);
+		sistema.comprarFiguritas(111111);
+		sistema.pegarFiguritas(111111);
+		
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 
 		// participar en un sortepo por un premio instantaneo.

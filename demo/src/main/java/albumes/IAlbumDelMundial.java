@@ -110,7 +110,7 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 	private String saberTipoDeAlbum(int dni) {
 		Integer dniInteger = Integer.valueOf(dni);// esto de castear dni int a Integer realmente no se si es necesario.
 		if (participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio() != null) {
-			return participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio().getTipoAlbum();
+			return participantesConAlbumes.get(DniToHash.get(dniInteger)).getAlbumpropio().getClass().getSimpleName();
 		}
 		System.out.println("Error en el metodo saberTipoDeAlbum");
 		return "";
@@ -130,7 +130,12 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 		ArrayList<Figurita> sobre = new ArrayList<>();
 		sobre = factory.generarSobre(4);
 		for (Figurita nueva : sobre) {
-			nueva.setTipo(saberTipoDeAlbum(dni));
+			String set;
+			if(saberTipoDeAlbum(dni).equals("AlbumTradicional")){set="Tradicional";}
+			else if(saberTipoDeAlbum(dni).equals("AlbumWeb")){set="Web";}
+			else if(saberTipoDeAlbum(dni).equals("AlbumExtendido")){set="Extendido";}
+			else{set=null;}
+			nueva.setTipo(set);
 			participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);
 		}
 	}
@@ -146,13 +151,18 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 		if (!DniToHash.containsKey(dni)) {
 			throw new RuntimeException("Error, el participante no se encuentra registrado");
 		}
-		if (!participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum().equals("Extendido")) {
+		if (!participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getClass().getSimpleName().equals("AlbumExtendido")) {
 			throw new RuntimeException("Error el tipo de album no es el correcto");
 		}
 		ArrayList<FiguritaTop10> sobre = new ArrayList<>();
 		sobre = factory.generarSobreTop10(4);
 		for (FiguritaTop10 nueva : sobre) {
-			nueva.setTipo(saberTipoDeAlbum(dni));
+			String set;
+			if(saberTipoDeAlbum(dni).equals("AlbumTradicional")){set="Tradicional";}
+			else if(saberTipoDeAlbum(dni).equals("AlbumWeb")){set="Web";}
+			else if(saberTipoDeAlbum(dni).equals("AlbumExtendido")){set="Extendido";}
+			else{set=null;}
+			nueva.setTipo(set);
 			participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().agregarFigu(nueva);
 		}
 
@@ -247,10 +257,10 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 		if (!DniToHash.containsKey(dni)) {
 			throw new RuntimeException("El participante no se encuentra registrado");
 		}
-		if (participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum()
-				.equals("Tradicional") == false) {
+	//	System.out.println(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getClass().getSimpleName());
+		if (participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getClass().getSimpleName().equals("AlbumTradicional") == false) {
 			throw new RuntimeException("Error su Album es incorrecto : "
-					+ participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum());
+					+ participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getClass().getSimpleName());
 		} // cuando el album no sea tradicional, mostramos esto.
 		String premios[] = { "una pelota", "un paquete de cigarrillos", "una camiseta firmada por el tucu",
 				"un saludo de el dibu" };
@@ -310,13 +320,16 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 		Set<Integer> setOfKeys = participantesConAlbumes.keySet();// aca voy a guardar las keys
 		for (Integer key : setOfKeys) {
 
-			if (DniToHash.get(dni) != key && participantesConAlbumes.get(key).getAlbumpropio().getTipoAlbum()
-					.equals(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getTipoAlbum())) {// si no son el mismo participante Y tienen el mismo tipo de album:
+			if (DniToHash.get(dni) != key && participantesConAlbumes.get(key).getAlbumpropio().getClass().getSimpleName()
+					.equals(participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio().getClass().getSimpleName())) {// si no son el mismo participante Y tienen el mismo tipo de album:
 				// revisar su lista, checkear que este repetida y que le falte a "A"
 				Album partA = participantesConAlbumes.get(DniToHash.get(dni)).getAlbumpropio();
 				Album partB = participantesConAlbumes.get(key).getAlbumpropio();
 				for (Figurita iter : partB.figusRepetidas()) {
-					if (!partA.contains(iter) && iter.getTipoDeFigu().equals(partA.getTipoAlbum())
+					if (!partA.contains(iter) && (     (iter.getTipoDeFigu().equals("Tradicional") &&partA.getClass().getSimpleName().equals("AlbumTradicional") ) ||  (iter.getTipoDeFigu().equals("Web") &&partA.getClass().getSimpleName().equals("AlbumWeb") )||  (iter.getTipoDeFigu().equals("Extendido") &&partA.getClass().getSimpleName().equals("AlbumExtendido") ))
+
+
+
 							&& partA.getFigurita(codFigurita).ValorFinal() >= iter.ValorFinal()) {
 						// en caso de encontrar realiza el intercambio y devuelve true.
 						partA.agregarFigu(iter);
@@ -423,11 +436,22 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 		return completaron;
 	}
 
+	
 	public String toString() {
+
+
 		StringBuilder ret = new StringBuilder();
 		ret.append("~~~Album del mundial~~~ \n Cantidad de participantes que llenaron el Album: " + ganadores.size()
 				+ "\n Cantidad que siguen participando(No llenaron): " + (DniToHash.size() - ganadores.size()));
 
-		return ret.toString();
+	Set<Integer> setOfKeys = participantesConAlbumes.keySet();
+
+	ret.append("\n Album del mundial, participantes:\n");
+	for (Integer key : setOfKeys) {
+		ret.append(" "+participantesConAlbumes.get(key).toString()+" "+participantesConAlbumes.get(key).porcentajeCompleto()+"% completado \n");
+
+		
 	}
+	return ret.toString();
+}
 }
