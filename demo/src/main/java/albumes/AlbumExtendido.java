@@ -5,13 +5,13 @@ import java.util.ListIterator;
 
 public class AlbumExtendido extends AlbumTradicional {
 
-  private int cantExtend = 20;
-  FiguritaTop10 coleccion20[] = new FiguritaTop10[cantExtend];
+  private int cantExtend ;
+  FiguritaTop10 coleccion20[];
 
   public AlbumExtendido(int codigoUnico, String nombreDueno, int dniDueno, String paisesParticipantes[]) {
     super(codigoUnico, nombreDueno, dniDueno, paisesParticipantes);
-    // TODO Auto-generated constructor stub
-   // this.tipoAlbum = "Extendido";
+    this.cantExtend= 20;
+    this.coleccion20 = new FiguritaTop10[cantExtend];
 
   }
 

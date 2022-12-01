@@ -10,8 +10,17 @@ public class Usuario<T extends Album> implements Comparable<Usuario<Album>> {// 
     int dni;
 
     String nombre;
-    String premio = "";// Soluciona lo de mostrar "null"
-    T albumpropio;
+    String premio ;
+    Album albumpropio;// Ya puse el atributo como Album como se pedia.
+
+    public Usuario(int dni, String nombre) {
+        if (dni < 1 | 99999999 < dni) {
+            throw new ArithmeticException("No se pudo registrar el Participante, razon: Dni invalido");
+        }
+        this.dni = dni;
+        this.nombre = nombre;
+        this.premio="";
+    }
 
     public void setPremio(String premio) {
         this.premio = premio;
@@ -25,7 +34,7 @@ public class Usuario<T extends Album> implements Comparable<Usuario<Album>> {// 
         return dni;
     }
 
-    public T getAlbumpropio() {
+    public Album getAlbumpropio() {
         return albumpropio;
     }
 
@@ -33,26 +42,6 @@ public class Usuario<T extends Album> implements Comparable<Usuario<Album>> {// 
         this.albumpropio = alb;
     }
 
-    public Usuario(int dni, String nombre) {
-        if (dni < 1 | 99999999 < dni) {
-            throw new ArithmeticException("No se pudo registrar el Participante, razon: Dni invalido");
-        }
-        this.dni = dni;
-        this.nombre = nombre;
-    }
-
-    boolean solicitarAlbum(String tipoAlbum) {
-        return false;
-    }
-
-    void comprarFigus(String tipoDeFigu) {
-    }
-
-    void vermicodigoweb() {
-    }
-
-    void comprarfigusconcodigoweb() {
-    }
 
     ArrayList<String> solicitarPegarFigus() {
         return this.albumpropio.verificarYpegarFigus();
@@ -81,8 +70,6 @@ public class Usuario<T extends Album> implements Comparable<Usuario<Album>> {// 
         return (this.getDni() == other.getDni());
     }
 
-    void solicitarPremio() {
-    }
 
     public String toString() {
         return "(" + String.valueOf(this.dni) + ") " + this.nombre + " :" + this.premio;

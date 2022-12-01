@@ -3,7 +3,7 @@ package albumes;
 public class Figurita implements Cloneable {
     String nombre;
     String tipoDeFigu;// Tradicional,Web o Extendido.
-    int valorBase = 10;// elijo un valor base de todas las figus.
+    int valorBase ;// elijo un valor base de todas las figus.
     int rankingValorBase;// ranking de la figu
     int numeroQueIdentifica;// numero unico de la figurita
     String pais;
@@ -13,6 +13,7 @@ public class Figurita implements Cloneable {
         this.nombre = nombre;
         this.tipoDeFigu = tipoDeFigu;
         this.pais = pais;
+        this.valorBase=10;
         this.rankingValorBase = rankingValorBase;
         this.numeroQueIdentifica = numeroQueIdentifica;
 

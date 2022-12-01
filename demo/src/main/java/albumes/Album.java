@@ -7,23 +7,26 @@ import java.util.ListIterator;
 public abstract class Album {
 
    // String tipoAlbum;
-    int cantPaises = 32;
-    int cantJugadores = 12;
+    int cantPaises;
+    int cantJugadores ;
     int codigoUnico;// Esto se usa para sortear el premio instantaneo
     int dniDueno;
     String nombreDueno;
-    Figurita coleccion[] = new Figurita[cantPaises * cantJugadores];// 384
-    ArrayList<Figurita> figuritasSinpegar = new ArrayList<>();
-    Map<String, Boolean> paisesCompletos = new HashMap<String, Boolean>();
-    boolean AlbumCompleto = false;
+    Figurita coleccion[] ;// 384
+    ArrayList<Figurita> figuritasSinpegar;
+    Map<String, Boolean> paisesCompletos;
+    boolean AlbumCompleto ;
 
     public Album() {
-    };// El constructor vacio
+    this.cantPaises = 32;
+    this.cantJugadores = 12;
+    this.coleccion = new Figurita[cantPaises * cantJugadores];// 384
+    this.figuritasSinpegar = new ArrayList<>();
+    this.paisesCompletos = new HashMap<String, Boolean>();
+    this.AlbumCompleto = false;
 
-  /*  public String getTipoAlbum() {
-        // System.out.println("se ejecuto el metodo get delpadre");
-        return this.tipoAlbum;
-    }*/
+
+    };
 
     public boolean isAlbumCompleto() {
         return AlbumCompleto;

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Fabrica {
 
-	private int cantPaises = 32;
+	private int cantPaises;
 	private String[] paisesParticipantes;// esto va setear los paises participantes en la clase del
 	private int lugaresPorPais;
 	private String[] listadoDeMundialesTop10;
@@ -13,24 +13,32 @@ public class Fabrica {
 	private Map<String, Integer> ranking;
 	// esto de nombre y apellidos es para generar figus que vayan intercalando
 	// nombres y apellidos
-	private String[] nombres = new String[] { "Emiliano", "Gerónimo", "Franco", "Nahuel", "Gonzalo", "Cristian",
-			"Germán", "Nicolás", "Lisandro", "Marcos", "Rodrigo", "Leandro", "Lionel", "Alexis", "Guido", "Alejandro",
-			"Enzo", "Exequiel", "Lautaro", "Ángel" };// 20
-	private String[] apellidos = new String[] { "Gómez", "Fernández", "Palacios", "Messi", "Martínez", "Di María",
-			"Álvarez", "González", "Correa", "Dybala", "Foyth", "Lo Celso", "Almada", "Rodríguez", "Mac Allister",
-			"Paredes", "De Paul", "Tagliafico", "Acuña", "Rulli", "Montiel" };// 21
-	private Figurita[] coleccion = new Figurita[cantPaises * lugaresPorPais];
-	private FiguritaTop10[] coleccion20 = new FiguritaTop10[20];
+	private String[] nombres ;
+	private String[] apellidos;
+	private Figurita[] coleccion ;
+	private FiguritaTop10[] coleccion20;
 
 	Fabrica() {
+		this.apellidos = new String[] { "Gómez", "Fernández", "Palacios", "Messi", "Martínez", "Di María",
+		"Álvarez", "González", "Correa", "Dybala", "Foyth", "Lo Celso", "Almada", "Rodríguez", "Mac Allister",
+		"Paredes", "De Paul", "Tagliafico", "Acuña", "Rulli", "Montiel" };// 21
+
+		
+		this.nombres = new String[] { "Emiliano", "Gerónimo", "Franco", "Nahuel", "Gonzalo", "Cristian",
+		"Germán", "Nicolás", "Lisandro", "Marcos", "Rodrigo", "Leandro", "Lionel", "Alexis", "Guido", "Alejandro",
+		"Enzo", "Exequiel", "Lautaro", "Ángel" };// 20
 
 		lugaresPorPais = 12;
+		this.cantPaises=32;
+		this.coleccion = new Figurita[cantPaises * lugaresPorPais];
+		this.coleccion20 = new FiguritaTop10[20];
 		paisesParticipantes = generarPaisesClasificados();
 		listadoDeMundialesTop10 = generarListadoDeMundiales();
 		balonYPaisPorMundialTop10 = generarPaisesPorMundial();
 		ranking = generarRanking();
 		coleccion = generarColeccionCompleta();
 		coleccion20 = generarColeccion20();
+
 	}
 
 	////////////////////////////////////////////////////////////////////////

@@ -7,17 +7,24 @@ import java.util.Set;
 import java.util.ArrayList;
 
 public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
-	Fabrica factory = new Fabrica();
-	Hashtable<Integer, Usuario<Album>> participantesConAlbumes = new Hashtable<>();
-	Map<String, Boolean> codigoWeb = new HashMap<>();
-	Map<Integer, Integer> DniToHash = new HashMap<>();// La idea es hacer un diccionario, con los dnis y hash
+	Fabrica factory ;
+	Hashtable<Integer, Usuario<Album>> participantesConAlbumes;
+	Map<String, Boolean> codigoWeb;
+	Map<Integer, Integer> DniToHash;// La idea es hacer un diccionario, con los dnis y hash
 														// correspondientes, despues dado un dni consigo el hash y puedo
 														// buscar en el otro map.
-	Map<Integer, Boolean> SorteoDado = new HashMap<>();// Se usa para saber si a X participante ya le dieron el
+	Map<Integer, Boolean> SorteoDado ;// Se usa para saber si a X participante ya le dieron el
 														// sorteoInstantaneo.
-	ArrayList<String> ganadores = new ArrayList<>();
+	ArrayList<String> ganadores ;
 
 	public IAlbumDelMundial() {
+		this.factory= new Fabrica();
+		this.participantesConAlbumes= new Hashtable<>();
+		this.codigoWeb = new HashMap<>();
+		this.DniToHash = new HashMap<>();
+		this.SorteoDado= new HashMap<>();
+		this.ganadores= new ArrayList<>();
+
 	}
 
 	/**
