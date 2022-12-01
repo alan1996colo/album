@@ -455,7 +455,7 @@ public class IAlbumDelMundial implements InterfazPublicaAlbumDelMundial {
 
 	ret.append("\n Album del mundial, participantes:\n");
 	for (Integer key : setOfKeys) {
-		ret.append(" "+participantesConAlbumes.get(key).getNombre()+", Dni["+participantesConAlbumes.get(key).getDni()+"] "+participantesConAlbumes.get(key).porcentajeCompleto()+"% completado \n");
+		ret.append(" "+participantesConAlbumes.get(key).getNombre()+", ("+participantesConAlbumes.get(key).getAlbumpropio().getClass().getSimpleName()+"), Dni["+participantesConAlbumes.get(key).getDni()+"] "+participantesConAlbumes.get(key).porcentajeCompleto()+"% completado \n");
 
 		
 	}
